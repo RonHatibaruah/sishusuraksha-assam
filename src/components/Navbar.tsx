@@ -1,19 +1,16 @@
 import React from 'react';
 import { 
-  TrendingUp, 
-  MapPin, 
+  Baby, 
+  Building2, 
+  Navigation, 
+  HeartHandshake, 
+  BarChart3, 
+  MessageSquare, 
   HelpCircle, 
-  Lock, 
-  UserCheck, 
-  ShieldCheck,
-  Wheat,
-  Warehouse,
-  MessageSquare,
-  ArrowLeftRight,
-  BarChart3,
-  BookOpen
+  ShieldAlert, 
+  User,
+  Heart
 } from 'lucide-react';
-import { AdminUser } from '../types/agri';
 
 interface NavbarProps {
   activeTab: string;
@@ -21,8 +18,6 @@ interface NavbarProps {
   selectedRole: string;
   setSelectedRole: (role: string) => void;
   onOpenTutorial: () => void;
-  adminUser: AdminUser | null;
-  onOpenAdminLogin: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -30,198 +25,183 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   selectedRole,
   setSelectedRole,
-  onOpenTutorial,
-  adminUser,
-  onOpenAdminLogin
+  onOpenTutorial
 }) => {
   return (
     <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md">
       {/* Top Government Banner */}
       <div className="bg-slate-950 px-4 py-1.5 text-xs text-slate-400 border-b border-slate-800/80 flex flex-wrap justify-between items-center gap-2">
         <div className="flex items-center gap-3">
-          <span className="font-semibold text-emerald-400 flex items-center gap-1.5">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="font-semibold text-rose-400 flex items-center gap-1.5">
+            <span className="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
             GOVERNMENT OF ASSAM
           </span>
           <span className="text-slate-600">|</span>
-          <span>Department of Agriculture ● ASAMB ● AAU Jorhat AMIU</span>
+          <span>Health and Family Welfare Department ● National Health Mission (NHM) Assam</span>
           <span className="text-slate-600">|</span>
-          <span className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded font-mono text-[10px] border border-emerald-800/60">
-            NESFIC-D-35 Stream 1
+          <span className="bg-rose-950 text-rose-300 px-2 py-0.5 rounded font-mono text-[10px] border border-rose-800/60 font-bold">
+            NESFIC-D-26 Stream 1
           </span>
         </div>
+
         <div className="flex items-center gap-4 text-[11px]">
-          <span className="text-slate-400">Assam State Data Centre (ASDC) • Agri-Intelligence Enclave</span>
-          <button 
+          <button
             onClick={onOpenTutorial}
-            className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 transition-colors font-semibold cursor-pointer underline decoration-dotted"
-            title="Learn what the application is and how to use it"
+            className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition-all font-semibold cursor-pointer"
+            title="Open Tutorial Guide: What the application is and how to use it"
           >
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>Tutorial: What It Is & How To Use</span>
+            <HelpCircle className="w-3.5 h-3.5 text-rose-400" />
+            <span>Tutorial & User Guide</span>
           </button>
+          <span className="text-slate-500 font-mono hidden sm:inline">Dispur, Guwahati</span>
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
-        {/* Brand */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('executive')}>
-          <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-xl shadow-lg shadow-emerald-500/20 text-white flex items-center justify-center">
-            <Wheat className="w-6 h-6 animate-pulse" />
+      {/* Main Brand & Role Switcher Bar */}
+      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-rose-950/50">
+            <Baby className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                KrishiDrishti <span className="text-emerald-400 font-normal text-sm">● কৃষি-দৃষ্টি</span>
-              </span>
-              <span className="text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800/70 px-1.5 py-0.5 rounded">
-                v2.6 AI
+              <h1 className="text-lg font-extrabold text-white tracking-tight flex items-center gap-1.5">
+                SishuSuraksha <span className="text-rose-400 font-normal">শিশু-সুৰক্ষা</span>
+              </h1>
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                PROTOTYPE LIVE
               </span>
             </div>
             <p className="text-xs text-slate-400">
-              Assam Agricultural Commodity Price Intelligence & Forecasting Sentinel
+              Timely Identification, Referral & Follow-up of Sick Newborns
             </p>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800/80 overflow-x-auto max-w-full">
-          <button
-            onClick={() => setActiveTab('executive')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'executive'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>Overview</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('forecast')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'forecast'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>AI Forecaster</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('arbitrage')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'arbitrage'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <ArrowLeftRight className="w-3.5 h-3.5" />
-            <span>Hold / Sell / Route</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('map')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'map'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Mandi WebGIS</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('storage')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'storage'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <Warehouse className="w-3.5 h-3.5" />
-            <span>Cold Storage / e-NWR</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('advisory')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'advisory'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Farmer Advisory</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('admin')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
-              activeTab === 'admin'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Directorate Command</span>
-          </button>
-        </nav>
-
-        {/* User Role Switcher, Tutorial Guide & Auth */}
-        <div className="flex items-center gap-2">
-          {/* Prominent Header Tutorial Button */}
+        {/* Operational Role Switcher & Tutorial Quick-Button */}
+        <div className="flex items-center gap-2 self-start md:self-center">
           <button
             onClick={onOpenTutorial}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-600/80 text-emerald-300 text-xs font-semibold hover:bg-emerald-900 transition-colors shadow-sm cursor-pointer whitespace-nowrap"
-            title="Open comprehensive tutorial & evaluator guide"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-200 border border-rose-500/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
           >
-            <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="hidden sm:inline">Tutorial & Guide</span>
-            <span className="sm:hidden">Guide</span>
+            <HelpCircle className="w-4 h-4 text-rose-400" />
+            <span>How to Use</span>
           </button>
 
-          <div className="hidden xl:flex items-center gap-1.5 bg-slate-950 px-2 py-1 rounded-lg border border-slate-800 text-xs">
-            <span className="text-slate-400 text-[11px]">Role:</span>
-            <select
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              className="bg-transparent text-emerald-300 font-medium focus:outline-none cursor-pointer text-xs"
+          <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+            <span className="text-slate-500 px-2 font-medium flex items-center gap-1 hidden sm:flex">
+              <User className="w-3.5 h-3.5" />
+              Role:
+            </span>
+            <button
+              onClick={() => { setSelectedRole('ASHA'); setActiveTab('triage'); }}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                selectedRole === 'ASHA' ? 'bg-rose-600 text-white shadow' : 'text-slate-300 hover:text-white'
+              }`}
             >
-              <option value="DIRECTORATE" className="bg-slate-900 text-slate-200">
-                Directorate of Agriculture (State HQ)
-              </option>
-              <option value="ASAMB" className="bg-slate-900 text-slate-200">
-                ASAMB Mandi Secretary (Market Committee)
-              </option>
-              <option value="FPO" className="bg-slate-900 text-slate-200">
-                Farmer Producer Org (FPO Manager)
-              </option>
-            </select>
+              ASHA / ANM
+            </button>
+            <button
+              onClick={() => { setSelectedRole('FACILITY'); setActiveTab('beds'); }}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                selectedRole === 'FACILITY' ? 'bg-cyan-600 text-white shadow' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              SNCU Facility
+            </button>
+            <button
+              onClick={() => { setSelectedRole('ROUTING'); setActiveTab('routing'); }}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                selectedRole === 'ROUTING' ? 'bg-purple-600 text-white shadow' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              108 Dispatch
+            </button>
+            <button
+              onClick={() => { setSelectedRole('EXECUTIVE'); setActiveTab('audit'); }}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                selectedRole === 'EXECUTIVE' ? 'bg-emerald-600 text-white shadow' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              State Mission
+            </button>
           </div>
-
-          {adminUser ? (
-            <button
-              onClick={() => setActiveTab('admin')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-800/80 text-emerald-300 text-xs font-medium cursor-pointer hover:bg-emerald-900/60 transition-colors"
-            >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>{adminUser.name}</span>
-            </button>
-          ) : (
-            <button
-              onClick={onOpenAdminLogin}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-medium cursor-pointer hover:bg-slate-700 transition-colors"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>State Login</span>
-            </button>
-          )}
         </div>
+      </div>
+
+      {/* Tabs Navigation */}
+      <div className="max-w-7xl mx-auto px-4 border-t border-slate-800/60 flex space-x-1 overflow-x-auto py-1">
+        <button
+          onClick={() => setActiveTab('triage')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'triage'
+              ? 'bg-rose-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <Baby className="w-4 h-4" />
+          Field Triage (ASHA Screening)
+        </button>
+
+        <button
+          onClick={() => setActiveTab('beds')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'beds'
+              ? 'bg-cyan-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <Building2 className="w-4 h-4" />
+          SNCU / NICU Bed Command
+        </button>
+
+        <button
+          onClick={() => setActiveTab('routing')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'routing'
+              ? 'bg-purple-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <Navigation className="w-4 h-4" />
+          108 Dispatch & Riverine Route
+        </button>
+
+        <button
+          onClick={() => setActiveTab('hbnc')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'hbnc'
+              ? 'bg-emerald-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <HeartHandshake className="w-4 h-4" />
+          HBNC 7-Visit Continuum
+        </button>
+
+        <button
+          onClick={() => setActiveTab('audit')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'audit'
+              ? 'bg-amber-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <BarChart3 className="w-4 h-4" />
+          Statewide Surveillance & Audit
+        </button>
+
+        <button
+          onClick={() => setActiveTab('advisory')}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'advisory'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <MessageSquare className="w-4 h-4" />
+          Vernacular Caregiver Hub
+        </button>
       </div>
     </header>
   );

@@ -1,19 +1,21 @@
 import React from 'react';
 import { 
   HelpCircle, 
-  TrendingUp, 
-  ArrowLeftRight, 
-  Warehouse, 
+  Baby, 
+  Building2, 
+  Navigation, 
+  HeartHandshake, 
+  BarChart3, 
   MessageSquare, 
   ShieldCheck, 
-  Wheat, 
   CheckCircle2, 
   Sparkles,
   MapPin,
-  BarChart3,
-  BookOpen,
-  Key,
-  ExternalLink
+  Clock,
+  ExternalLink,
+  Flame,
+  AlertTriangle,
+  UserCheck
 } from 'lucide-react';
 
 interface TutorialModalProps {
@@ -30,20 +32,20 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-emerald-600 rounded-xl text-white shadow-lg shadow-emerald-600/30">
-              <Wheat className="w-6 h-6 animate-pulse" />
+            <div className="p-2.5 bg-rose-600 rounded-xl text-white shadow-lg shadow-rose-600/30">
+              <Baby className="w-6 h-6 animate-pulse" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-white">
-                  KrishiDrishti (কৃষি-দৃষ্টি) • Comprehensive Evaluator & Tutorial Guide
+                  SishuSuraksha (শিশু-সুৰক্ষা) • Evaluator & User Guide
                 </h2>
-                <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded font-mono font-bold">
-                  NESFIC-D-35
+                <span className="text-[10px] bg-rose-950 text-rose-300 border border-rose-800 px-2 py-0.5 rounded font-mono font-bold">
+                  NESFIC-D-26
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                What this application is, why it was built for Assam, and step-by-step instructions on how to use every module
+                What this application is, why it was engineered for Assam, and step-by-step instructions on how to use every module
               </p>
             </div>
           </div>
@@ -55,149 +57,159 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
           </button>
         </div>
 
-        {/* Section 1: What is KrishiDrishti? */}
+        {/* Section 1: What is SishuSuraksha? */}
         <div className="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
-          <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+          <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
             <Sparkles className="w-4 h-4" />
-            <span>PART 1: WHAT THE APPLICATION IS & WHY IT MATTERS</span>
+            <span>1. What is SishuSuraksha (শিশু-সুৰক্ষা)?</span>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            <strong>KrishiDrishti (Assam Agri-Price Sentinel)</strong> is a deep-tech, AI-powered commodity price intelligence, forecasting, and farmer decision-support platform engineered specifically for the <strong>Department of Agriculture, Government of Assam</strong>, in collaboration with the <strong>Assam State Agricultural Marketing Board (ASAMB)</strong> and <strong>Assam Agricultural University (AAU), Jorhat</strong> under <strong>NESFIC-D-35 (Stream 1 — Government Track)</strong>.
+            <b>SishuSuraksha</b> is an enterprise, offline-first clinical decision support, intelligent tri-level referral, and closed-loop neonatal care continuum platform engineered specifically for the <b>Health & Family Welfare Department, Government of Assam</b> and the <b>National Health Mission (NHM) Assam</b> under the <b>North East Seva First Innovation Challenge (NESFIC 2026 — Stream 1 Track: NESFIC-D-26)</b>.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <div className="font-semibold text-rose-300">The Core Problem:</div>
-              <div className="text-[11px] text-slate-400 mt-1">
-                85%+ of Assam's farmers are smallholders (&lt;2 Ha). During harvest gluts, lack of price visibility causes wholesale prices to crash 40%-60% below MSP at local rural hats.
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
+            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+              <span className="font-bold text-slate-200 block text-[11px] text-rose-300">
+                Gap 1: The Three Delays in Acute Neonatal Care
+              </span>
+              <p className="text-slate-400 text-[11px] leading-relaxed">
+                Replaces delayed paper-based screening with structured offline mobile triage, pre-referral stabilization guidance, and automated 108 road/boat ambulance routing that pre-heats hospital radiant warmers.
+              </p>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <div className="font-semibold text-cyan-300">The Technology:</div>
-              <div className="text-[11px] text-slate-400 mt-1">
-                Temporal Fusion Transformers (TFT) with quantile uncertainty bounds, fusing Agmarknet, e-NAM, Sentinel-2 satellite NDVI, and IMD weather telemetry (MAPE &lt; 5.75%).
-              </div>
-            </div>
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <div className="font-semibold text-emerald-300">The Direct Outcome:</div>
-              <div className="text-[11px] text-slate-400 mt-1">
-                +18% to +26% net farmgate price realization, 35% distress sale reduction, and instant 7% e-NWR warehouse loans to eliminate predatory debt traps.
-              </div>
+            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+              <span className="font-bold text-slate-200 block text-[11px] text-emerald-300">
+                Gap 2: Post-Discharge HBNC Dropouts
+              </span>
+              <p className="text-slate-400 text-[11px] leading-relaxed">
+                Connects hospital SNCU discharge records directly to the catchment village ASHA's phone, populating the 7 mandatory home visits (Days 1, 3, 7, 14, 21, 28, 42) with auto-escalation for missed visits.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Section 2: How to Use Each Module */}
+        {/* Section 2: Step-by-Step Module Guide */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-white font-bold text-sm">
-            <BookOpen className="w-4 h-4 text-emerald-400" />
-            <span>PART 2: STEP-BY-STEP MODULE WALKTHROUGH — HOW TO USE IT</span>
-          </div>
+          <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <HelpCircle className="w-4 h-4 text-cyan-400" />
+            <span>2. Step-by-Step Module Walkthrough</span>
+          </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
-            {/* Step 1 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            {/* Tab 1: Field Triage */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <BarChart3 className="w-4 h-4 text-emerald-400" />
-                  <span>1. Market Overview Tab</span>
+                <span className="font-bold text-rose-400 flex items-center gap-1.5">
+                  <Baby className="w-4 h-4" />
+                  1. Field Triage (ASHA / ANM Mode)
                 </span>
-                <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded">TICKER & ALERTS</span>
+                <span className="text-[10px] bg-rose-950 text-rose-300 px-1.5 py-0.5 rounded border border-rose-800">
+                  Bedside IMNCI
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> Review live wholesale clearing rates across 12 Assam commodities (Sali/Boro Paddy, Mustard, Joha Rice, Kaji Nemu, Ginger, Tomato). Look for red <em>MSP DEFICIT</em> flags and click on any crop card to immediately jump into its deep AI forecast.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> Select any newborn case from the left cohort roster. Adjust the <b>Body Temperature slider</b> or use the <b>60-second breathing tap timer</b>. Check clinical danger signs (chest indrawing, grunting, poor suckling, cord pus). Watch the triage card dynamically classify the infant into <b>RED (Emergency SNCU/NICU Transfer)</b>, <b>YELLOW (Urgent NBSU Evaluation)</b>, or <b>GREEN (Stable HBNC)</b> with step-by-step pre-referral stabilization guidance.
               </p>
             </div>
 
-            {/* Step 2 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+            {/* Tab 2: Hospital Bed Command */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <TrendingUp className="w-4 h-4 text-emerald-400" />
-                  <span>2. AI Forecaster Tab</span>
+                <span className="font-bold text-cyan-400 flex items-center gap-1.5">
+                  <Building2 className="w-4 h-4" />
+                  2. SNCU / NICU Bed Command
                 </span>
-                <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded">TFT ENGINE</span>
+                <span className="text-[10px] bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded border border-cyan-800">
+                  Hospital Telemetry
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> Select a crop and mandi. Switch between <strong>7-Day Tactical</strong> (daily prices), <strong>30-Day Storage</strong> (holding ROI), and <strong>90-Day Pre-Sowing</strong> horizons. Hover over bars to see the P10 floor (worst-case), P50 median, and P90 peak bounds, along with plain-language advice in Assamese and English.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> View live occupancy across GMCH, FAAMCH Barpeta, Dhubri Civil Hospital, etc. Track available radiant warmers, phototherapy, and CPAP units. Inspect the <b>Incoming Transfer Queue</b>, acknowledge pre-arrival alerts to mobilize resuscitation teams, and click <b>Confirm Bed Admission</b>.
               </p>
             </div>
 
-            {/* Step 3 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+            {/* Tab 3: Geospatial Referral Router */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-cyan-300 flex items-center gap-1.5">
-                  <ArrowLeftRight className="w-4 h-4 text-cyan-400" />
-                  <span>3. Hold / Sell / Route Sandbox</span>
+                <span className="font-bold text-purple-400 flex items-center gap-1.5">
+                  <Navigation className="w-4 h-4" />
+                  3. 108 Emergency Dispatch & Routing
                 </span>
-                <span className="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded">ARBITRAGE</span>
+                <span className="text-[10px] bg-purple-950 text-purple-300 px-1.5 py-0.5 rounded border border-purple-800">
+                  Riverine & Road GIS
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> Enter your origin mandi (e.g. Kharupetia), select your crop, consignment quantity in quintals, and truck size. The system calculates the exact <strong>Net Realizable Value (NRV)</strong> across destination mandis after deducting fuel freight, transit shrinkage, and mandi cess.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> Explore the interactive Leaflet GIS map of Assam. Toggle <b>Boat Ambulances (Char Fleet)</b> to view Brahmaputra sandbar island evacuation routes (e.g. Alomganj Char to Dhubri Hospital). Inspect real-time en-route vitals (SpO2, Temp, HR) transmitted directly from the boat/ambulance.
               </p>
             </div>
 
-            {/* Step 4 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+            {/* Tab 4: HBNC 7-Visit Care Continuum */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-emerald-400" />
-                  <span>4. Mandi WebGIS Map</span>
+                <span className="font-bold text-emerald-400 flex items-center gap-1.5">
+                  <HeartHandshake className="w-4 h-4" />
+                  4. HBNC 7-Visit Continuum
                 </span>
-                <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded">SPATIAL GIS</span>
+                <span className="text-[10px] bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-800">
+                  Facility-to-Home
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> Interact with the statewide Leaflet map covering all 35 Assam districts. Click on any green (terminal market), blue (APMC regulated), or red (peak glut) mandi marker to view daily arrival volumes, turnover, and connected national highways.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> Select a discharged infant to view their post-SNCU timeline. See scheduled visits for Days 1, 3, 7, 14, 21, 28, and 42. Click <b>Record ASHA Visit</b> to log weight gain and temperature, or click <b>Escalate to BPHN</b> on flagged overdue visits to trigger supervisory SMS alerts.
               </p>
             </div>
 
-            {/* Step 5 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+            {/* Tab 5: Statewide Surveillance & Audit */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-amber-300 flex items-center gap-1.5">
-                  <Warehouse className="w-4 h-4 text-amber-400" />
-                  <span>5. Cold Storage / e-NWR Tab</span>
+                <span className="font-bold text-amber-400 flex items-center gap-1.5">
+                  <BarChart3 className="w-4 h-4" />
+                  5. Statewide Surveillance & Audit
                 </span>
-                <span className="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded">CREDIT LINK</span>
+                <span className="text-[10px] bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded border border-amber-800">
+                  Executive Radar
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> View capacity and real-time vacancy meters for accredited Assam cold storages. Enter crop and planned holding days to calculate net storage profit and simulate generating a <strong>75% instant collateral pledge loan at 7% subsidized bank interest</strong>.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> Review top-line Assam neonatal health indicators (~4.85 lakh annual cohort, 63.7% transit reduction). Inspect the district ranking table highlighting high-burden aspirational districts (Dhubri, Barpeta, Goalpara) vs. stabilized clusters.
               </p>
             </div>
 
-            {/* Step 6 */}
-            <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5">
+            {/* Tab 6: Vernacular Caregiver Hub */}
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-purple-300 flex items-center gap-1.5">
-                  <MessageSquare className="w-4 h-4 text-purple-400" />
-                  <span>6. Farmer Advisory & WhatsApp</span>
+                <span className="font-bold text-blue-400 flex items-center gap-1.5">
+                  <MessageSquare className="w-4 h-4" />
+                  6. Vernacular Caregiver Advisory Hub
                 </span>
-                <span className="text-[10px] bg-purple-950 text-purple-300 px-2 py-0.5 rounded">MULTILINGUAL</span>
+                <span className="text-[10px] bg-blue-950 text-blue-300 px-1.5 py-0.5 rounded border border-blue-800">
+                  Assamese & English
+                </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                <strong>How to use:</strong> Test the conversational WhatsApp Business Bot simulator. Type a query in Assamese or English (e.g., <em>"Moi sarisoh ketiya bikri korim?"</em> or <em>"Tomato price in Pamohi"</em>) and experience instant natural-language guidance with audio voice IVRS simulation.
+              <p className="text-slate-300 leading-relaxed text-[11px]">
+                <b>How to use:</b> Test dispatching natural language counseling alerts to parents via Meta WhatsApp Cloud API and C-DAC SMS in <b>Assamese (অসমীয়া)</b> or English covering danger sign warnings, Kangaroo Mother Care, and exclusive breastfeeding.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Section 3: Official State Login Credentials */}
-        <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950 via-slate-950 to-teal-950 border border-emerald-700/80 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="space-y-1">
-            <div className="font-bold text-white flex items-center gap-1.5">
-              <Key className="w-4 h-4 text-emerald-400" />
-              <span>Directorate of Agriculture State Command Login:</span>
-            </div>
-            <div className="text-[11px] text-slate-300">
-              Username: <code className="text-emerald-300 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">admin@agri.assam.gov.in</code> &nbsp;•&nbsp; 
-              Password: <code className="text-emerald-300 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">dispur2026</code>
-            </div>
+        {/* Section 3: Statutory Governance */}
+        <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 space-y-2">
+          <div className="flex items-center gap-2 text-slate-200 font-bold">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>Statutory Governance & Clinical Authority</span>
           </div>
+          <p className="text-[11px] leading-relaxed">
+            In compliance with the implementation directives of the Health & Family Welfare Department, Government of Assam, all clinical, diagnostic, and referral authorizations remain strictly with registered Medical Officers, Pediatricians, and Authorized Health Personnel. SishuSuraksha functions strictly as an auditable Clinical Decision Support System (CDSS) and emergency logistics coordination network.
+          </p>
+        </div>
 
+        {/* Close Button */}
+        <div className="pt-2 flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-md cursor-pointer shrink-0 text-center"
+            className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer"
           >
-            Start Exploring KrishiDrishti
+            Got It • Start Exploring SishuSuraksha
           </button>
         </div>
       </div>

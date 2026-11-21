@@ -1,14 +1,14 @@
 {
-  "name": "krishidrishti-assam",
+  "name": "sishusuraksha-assam",
   "private": true,
   "version": "1.0.0",
-  "description": "KrishiDrishti (কৃষি-দৃষ্টি) - Agricultural Commodity Price Intelligence & Forecasting for Farmer Decisions (NESFIC-D-35)",
+  "description": "SishuSuraksha (শিশু-সুৰক্ষা) - Timely Identification, Referral & Follow-up of Sick Newborns (NESFIC-D-26)",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "pages:build": "npm run build",
-    "deploy": "wrangler pages deploy dist --project-name=krishidrishti-assam",
+    "deploy": "wrangler pages deploy dist --project-name=sishusuraksha-assam",
     "preview": "vite preview"
   },
   "dependencies": {

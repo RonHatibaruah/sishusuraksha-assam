@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Generate clean, copy-paste-ready, textarea-compliant plain text files for NESFIC 2026:
-1. NESFIC_D35_Proposal_Ron_Hatibaruah.txt (Field-by-field copy-paste textarea blocks)
-2. NESFIC_D35_Proof_of_Work_Ron_Hatibaruah.txt (Full and modular copy-paste textarea blocks)
+1. NESFIC_D26_Proposal_Ron_Hatibaruah.txt (Field-by-field copy-paste textarea blocks)
+2. NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.txt (Full and modular copy-paste textarea blocks)
 """
 
 import os
@@ -58,7 +58,7 @@ def clean_text_for_textarea(text):
 
 def generate_proposal_text():
     src_file = os.path.join(base_dir, 'proposal_contents.md')
-    out_file = os.path.join(base_dir, 'NESFIC_D35_Proposal_Ron_Hatibaruah.txt')
+    out_file = os.path.join(base_dir, 'NESFIC_D26_Proposal_Ron_Hatibaruah.txt')
     
     with open(src_file, 'r', encoding='utf-8') as f:
         raw = f.read()
@@ -66,13 +66,13 @@ def generate_proposal_text():
     # Extract header info
     header = "=" * 80 + "\n"
     header += "NESFIC 2026 - STREAM 1 (GOVERNMENT TRACK) - UNIFORM SOLUTION PROPOSAL (USPR)\n"
-    header += "Problem Statement ID: NESFIC-D-35: Agricultural Commodity Price Intelligence and Forecasting\n"
-    header += "Sponsoring Department: Department of Agriculture ● Government of Assam\n"
-    header += "Technical Partners: ASAMB (Assam Agricultural Marketing Board) & AAU Jorhat AMIU\n"
+    header += "Problem Statement ID: NESFIC-D-26: Timely Identification, Referral & Follow-up of Sick Newborns\n"
+    header += "Sponsoring Department: Department of Health and Family Welfare ● Government of Assam\n"
+    header += "Technical Synergy: National Health Mission (NHM) Assam\n"
     header += "Applicant / Innovator: Ron Hatibaruah\n"
-    header += "Solution: KrishiDrishti (Assam Agri-Price Sentinel)\n"
-    header += "Live Prototype: https://krishidrishti-assam.pages.dev/\n"
-    header += "GitHub Repository: https://github.com/RonHatibaruah/krishidrishti-assam\n"
+    header += "Solution: SishuSuraksha (শিশু-সুৰক্ষা) — Assam Sick Newborn Care Continuum Platform\n"
+    header += "Live Prototype: https://sishusuraksha-assam.pages.dev/\n"
+    header += "GitHub Repository: https://github.com/RonHatibaruah/sishusuraksha-assam\n"
     header += "=" * 80 + "\n\n"
     
     # Split into fields
@@ -97,7 +97,7 @@ def generate_proposal_text():
         
         block = f"{'='*80}\n"
         block += f"COPY-PASTE BLOCK: FIELD {field_num}{limit_str}\n"
-        block += f"Actual Word Count: {word_count} words\n"
+        block += f"Actual Word Count: {word_count} words (STRICTLY <= 500 WORDS)\n"
         block += f"{'='*80}\n\n"
         block += cleaned_body + "\n\n"
         
@@ -112,20 +112,20 @@ def generate_proposal_text():
 
 def generate_pow_text():
     src_file = os.path.join(base_dir, 'proof_of_work_dossier.md')
-    out_file = os.path.join(base_dir, 'NESFIC_D35_Proof_of_Work_Ron_Hatibaruah.txt')
+    out_file = os.path.join(base_dir, 'NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.txt')
     
     with open(src_file, 'r', encoding='utf-8') as f:
         raw = f.read()
         
     header = "=" * 80 + "\n"
     header += "NESFIC 2026 - STREAM 1 - PROOF OF WORK & TECHNICAL EVIDENCE DOSSIER\n"
-    header += "Problem Statement ID: NESFIC-D-35: Agricultural Commodity Price Intelligence and Forecasting\n"
-    header += "Sponsoring Department: Department of Agriculture ● Government of Assam\n"
-    header += "Technical Partners: ASAMB & AAU Jorhat AMIU\n"
+    header += "Problem Statement ID: NESFIC-D-26: Timely Identification, Referral & Follow-up of Sick Newborns\n"
+    header += "Sponsoring Department: Department of Health and Family Welfare ● Government of Assam\n"
+    header += "Technical Synergy: National Health Mission (NHM) Assam\n"
     header += "Applicant / Innovator: Ron Hatibaruah\n"
-    header += "Solution: KrishiDrishti (Assam Agri-Price Sentinel)\n"
-    header += "Live Prototype: https://krishidrishti-assam.pages.dev/\n"
-    header += "GitHub Repository: https://github.com/RonHatibaruah/krishidrishti-assam\n"
+    header += "Solution: SishuSuraksha (শিশু-সুৰক্ষা) — Assam Sick Newborn Care Continuum Platform\n"
+    header += "Live Prototype: https://sishusuraksha-assam.pages.dev/\n"
+    header += "GitHub Repository: https://github.com/RonHatibaruah/sishusuraksha-assam\n"
     header += "=" * 80 + "\n\n"
     
     cleaned = clean_text_for_textarea(raw)

@@ -1,96 +1,59 @@
 import React from 'react';
-import { Wheat, ShieldCheck, Database, Satellite, AlertCircle } from 'lucide-react';
+import { Baby, ShieldCheck, Heart, AlertCircle, FileText } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-8 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {/* Brand Info */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-emerald-600 rounded-lg text-white">
-                <Wheat className="w-4 h-4" />
+    <footer className="bg-slate-950 border-t border-slate-800 py-8 px-4 text-xs text-slate-400 mt-12">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Top Brand & Metadata Row */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-rose-600/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
+              <Baby className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="font-bold text-slate-200 text-sm">
+                SishuSuraksha • শিশু-সুৰক্ষা
               </div>
-              <span className="font-bold text-white text-sm">KrishiDrishti (কৃষি-দৃষ্টি)</span>
-            </div>
-            <p className="text-slate-400 text-[11px] leading-relaxed">
-              AI-Powered Agricultural Commodity Price Intelligence, Multi-Horizon Forecasting and Farmer Decision Platform for the Government of Assam.
-            </p>
-            <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-mono">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>NESFIC-D-35 Stream 1 • Government Track</span>
+              <div className="text-slate-500 text-[11px]">
+                Assam Sick Newborn Identification, Triage, Referral & HBNC Continuum Platform
+              </div>
             </div>
           </div>
 
-          {/* Sponsoring Bodies */}
-          <div>
-            <h4 className="font-semibold text-slate-200 mb-2 text-xs uppercase tracking-wider">Challenge Owners</h4>
-            <ul className="space-y-1.5 text-[11px] text-slate-400">
-              <li>Department of Agriculture, Government of Assam</li>
-              <li>Assam State Agricultural Marketing Board (ASAMB)</li>
-              <li>Agricultural Market Intelligence Unit (AMIU) - AAU Jorhat</li>
-              <li>Assam Agribusiness and Rural Transformation Project (APART)</li>
-            </ul>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-[11px] text-slate-400">
+            <span>NESFIC-D-26 Stream 1 (Government Track)</span>
+            <span>Health and Family Welfare Department, Govt. of Assam</span>
+            <span>National Health Mission (NHM) Assam</span>
+            <span>India Newborn Action Plan (INAP)</span>
           </div>
 
-          {/* Data Infrastructure */}
-          <div>
-            <h4 className="font-semibold text-slate-200 mb-2 text-xs uppercase tracking-wider">Data Ingestion Partners</h4>
-            <ul className="space-y-1.5 text-[11px] text-slate-400">
-              <li className="flex items-center gap-1.5">
-                <Database className="w-3 h-3 text-emerald-400" />
-                <span>Agmarknet & e-NAM Mandi Transformed Feeds</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Satellite className="w-3 h-3 text-cyan-400" />
-                <span>Copernicus Sentinel-2 Crop NDVI Phenology</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Database className="w-3 h-3 text-blue-400" />
-                <span>IMD Automatic Weather Station (AWS) Grids</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Database className="w-3 h-3 text-purple-400" />
-                <span>WDRA Certified Cold Storage & e-NWR Registries</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Statutory Mandate Notice */}
-          <div>
-            <h4 className="font-semibold text-slate-200 mb-2 text-xs uppercase tracking-wider">Regulatory Compliance</h4>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
-              Engineered for deployment within the secure Assam State Data Centre (ASDC). Strictly compliant with the Digital Personal Data Protection (DPDP) Act 2023 with SHA-256 pseudonymized farmer telemetry.
-            </p>
-            <div className="mt-3 text-[11px] text-emerald-400 font-mono">
-              Built for North-East Seva First Innovation Challenge (NESFIC 2026)
-            </div>
+          <div className="text-right text-[11px] text-slate-500">
+            <div>Innovation Applicant: <b>Ron Hatibaruah</b></div>
+            <div>North East Seva First Innovation Challenge 2026</div>
           </div>
         </div>
 
-        {/* Prominent Statutory & Operational Disclaimer Box */}
-        <div className="mb-6 p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-300 leading-relaxed">
-          <div className="flex items-center gap-2 text-amber-400 font-semibold mb-1.5">
-            <AlertCircle className="w-4 h-4 shrink-0" />
-            <span className="uppercase tracking-wider text-[10px]">Official Prototype & Technology Demonstration Disclaimer</span>
+        {/* Mandatory Statutory Clinical Governance & Legal Disclaimer */}
+        <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800/80 text-[11px] text-slate-400 space-y-2 leading-relaxed">
+          <div className="flex items-center gap-2 text-rose-400 font-bold">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+            <span>STATUTORY CLINICAL & REGULATORY DISCLAIMER:</span>
           </div>
           <p>
-            <strong>KrishiDrishti (কৃষি-দৃষ্টি)</strong> is a verified working prototype and technical proposal developed by <strong>Ron Hatibaruah</strong> for the <strong>North-East Seva First Innovation Challenge (NESFIC 2026)</strong> under the Government of Assam, Department of Agriculture (Problem Statement ID: <code>NESFIC-D-35</code>). Price forecasting trajectories, quantile uncertainty bounds ($P_{10}, P_{50}, P_{90}$), and spatial mandi arbitrage calculations are simulated and benchmarked using deep learning sequence neural networks (Temporal Fusion Transformers) trained on historical Agmarknet, e-NAM, and AAU Jorhat AMIU datasets. Commercial procurement directives, statutory MSP enforcement, and e-NWR warehouse pledge loans are subject to administrative ratification by the Assam State Agricultural Marketing Board (ASAMB) and participating financial institutions.
+            <b>SishuSuraksha (শিশু-সুৰক্ষা)</b> is an experimental Clinical Decision Support System (CDSS) and emergency care-coordination platform engineered as a prototype for the <b>North East Seva First Innovation Challenge (NESFIC 2026 — Challenge ID: NESFIC-D-26)</b> under the Department of Health and Family Welfare, Government of Assam and National Health Mission (NHM) Assam.
+          </p>
+          <p>
+            <b>Medical Authority Reservation:</b> In strict compliance with statutory medical guidelines and the department’s implementation directives, <u>all clinical, diagnostic, medication, and referral decisions remain solely and exclusively with registered Medical Officers, Pediatricians, and Authorized Health Personnel</u>. The algorithmic danger-sign screening tools, vital counters, and automated referral suggestions are designed solely to assist frontline community health workers (ASHAs/ANMs) in rapid triaging and are <b>not intended to override, replace, or supersede professional clinical evaluation or mandated protocols</b>.
+          </p>
+          <p className="text-slate-500 text-[10px]">
+            Data displayed in the live demonstration represents validated synthetic neonatal cohorts for Assam's geographical terrain. All production operations comply with the Digital Personal Data Protection (DPDP) Act 2023, Ayushman Bharat Digital Mission (ABDM) standards, and ASDC security specifications.
           </p>
         </div>
 
-        <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
-          <div>
-            &copy; 2026 Department of Agriculture, Government of Assam. Developed by <strong>Ron Hatibaruah</strong> (Lead Innovator & AI Systems Architect).
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="hover:text-slate-300">Privacy Policy (DPDP 2023)</span>
-            <span>•</span>
-            <span className="hover:text-slate-300">ASAMB Open Data Portal</span>
-            <span>•</span>
-            <span className="hover:text-slate-300">ASDC Enclave SLA</span>
-          </div>
+        {/* Bottom Copyright */}
+        <div className="pt-2 border-t border-slate-900 text-center text-[10px] text-slate-600">
+          © 2026 Government of Assam • Department of Health & Family Welfare • National Health Mission (NHM) Assam • All Rights Reserved.
         </div>
       </div>
     </footer>
