@@ -25,7 +25,7 @@ Geographic Coverage (SEO & GEO): Assam State (IN-AS, 26.1445° N, 91.7362° E, D
 
 SishuSuraksha is a production-grade, offline-first clinical decision support and care-coordination platform engineered to eliminate preventable neonatal deaths across Assam's 35 districts. The system provides:
 
-1. Structured Bedside Danger-Sign Triage: Standardized 12-point clinical screening for frontline ASHA and ANM workers that instantly stratifies neonates into RED (Critical Emergency: immediate SNCU/NICU transfer <60 mins), YELLOW (Urgent Investigation: transfer to Block NBSU <4 hours), or GREEN (Stable: supervised home HBNC).
+1. Structured Bedside Danger-Sign Triage: Standardized 12-point clinical screening for frontline ASHA and ANM workers that instantly stratifies neonates into RED (Critical Emergency: immediate SNCU/NICU transfer within 60 mins), YELLOW (Urgent Investigation: transfer to Block NBSU within 4 hours), or GREEN (Stable: supervised home HBNC).
 2. Tri-Level Capacity & Bed Allocation Radar: Real-time occupancy tracking of neonatal beds, radiant warmers, phototherapy units, and CPAP ventilators across Newborn Stabilization Units (NBSUs), Special Newborn Care Units (SNCUs), and tertiary NICUs.
 3. Emergency Logistics Synchronization: Integrated 108 road ambulance and specialized Brahmaputra riverine boat-ambulance dispatch with real-time en-route vitals streaming (SpO2, axillary temperature, heart rate) and automated pre-arrival alerts that pre-heat radiant warmers prior to touchdown.
 4. Closed-Loop Post-Discharge HBNC Continuum: Automatic electronic linking of hospital discharge records to catchment village ASHAs, populating the 7 mandatory home visits (Days 1, 3, 7, 14, 21, 28, and 42) with automated escalation for missed visits.
@@ -42,26 +42,26 @@ $\text{Triage Index } (\Phi) = \sum_{i=1}^{n} w_i \cdot \delta_i(x_i)
 Where x_i represents clinical parameters, \delta_i(x_i) \in \{0, 1, 2, 3\} is the physiological deviation score, and w_i represents condition-specific clinical severity weights:
 
 \delta_{\text{temp}}(T) = \begin{cases} 
-3 & \text{if } T < 35.5^\circ\text{C (Severe Hypothermia)} \\
-2 & \text{if } 35.5^\circ\text{C} \le T < 36.0^\circ\text{C (Moderate Hypothermia)} \\
+3 & \text{if } T smaller than 35.5^\circ\text{C (Severe Hypothermia)} \\
+2 & \text{if } 35.5^\circ\text{C} \le T smaller than 36.0^\circ\text{C (Moderate Hypothermia)} \\
 0 & \text{if } 36.0^\circ\text{C} \le T \le 37.5^\circ\text{C (Normothermia)} \\
-2 & \text{if } 37.5^\circ\text{C} < T \le 38.5^\circ\text{C (Pyrexia)} \\
-3 & \text{if } T > 38.5^\circ\text{C (Hyperpyrexia / Sepsis)}
+2 & \text{if } 37.5^\circ\text{C} smaller than T \le 38.5^\circ\text{C (Pyrexia)} \\
+3 & \text{if } T greater than 38.5^\circ\text{C (Hyperpyrexia / Sepsis)}
 \end{cases}
 
 \delta_{\text{resp}}(RR) = \begin{cases} 
 3 & \text{if } RR \ge 70 \text{ breaths/min or Apnea episodes} \\
-2 & \text{if } 60 \le RR < 70 \text{ breaths/min (Tachypnea)} \\
-0 & \text{if } 40 \le RR < 60 \text{ breaths/min (Normal)} \\
-3 & \text{if } RR < 30 \text{ breaths/min (Bradypnea / Respiratory Failure)}
+2 & \text{if } 60 \le RR smaller than 70 \text{ breaths/min (Tachypnea)} \\
+0 & \text{if } 40 \le RR smaller than 60 \text{ breaths/min (Normal)} \\
+3 & \text{if } RR smaller than 30 \text{ breaths/min (Bradypnea / Respiratory Failure)}
 \end{cases}
 
-Critical emergency conditions (C_{\text{critical}} \in \{\text{Convulsions}, \text{Central Cyanosis}, \text{Expiratory Grunting}, \text{Unconsciousness}, \text{Birth Weight} < 1500\text{g}\}) act as non-linear overrides:
+Critical emergency conditions (C_{\text{critical}} \in \{\text{Convulsions}, \text{Central Cyanosis}, \text{Expiratory Grunting}, \text{Unconsciousness}, \text{Birth Weight} smaller than 1500\text{g}\}) act as non-linear overrides:
 
 \text{Severity Classification} = \begin{cases}
 \mathbf{RED} & \text{if } \Phi \ge 6 \quad \lor \quad \exists C_{\text{critical}} = \text{True} \\
-\mathbf{YELLOW} & \text{if } 3 \le \Phi < 6 \\
-\mathbf{GREEN} & \text{if } \Phi < 3
+\mathbf{YELLOW} & \text{if } 3 \le \Phi smaller than 6 \\
+\mathbf{GREEN} & \text{if } \Phi smaller than 3
 \end{cases}
 
 2.2 Silverman-Anderson Respiratory Retraction Scoring
@@ -101,11 +101,11 @@ The algorithmic triage engine was validated against a synthetic retrospective co
 
 Table 3.1: Clinical Triage Validation Performance (N = 4,500)
   • Clinical Danger Sign / Condition | Sensitivity | Specificity | PPV | NPV | AUC-ROC
-  • Severe Hypothermia (<35.5°C) | 99.4% | 98.1% | 96.2% | 99.7% | 0.992
+  • Severe Hypothermia (smaller than 35.5°C) | 99.4% | 98.1% | 96.2% | 99.7% | 0.992
   • Severe Respiratory Distress (SARI ≥ 4) | 98.2% | 96.8% | 94.1% | 99.1% | 0.985
   • Suspected Neonatal Sepsis / Cord Infection | 96.5% | 94.2% | 91.0% | 97.8% | 0.963
   • Pathological Jaundice (Palms/Soles) | 97.8% | 95.4% | 92.5% | 98.6% | 0.974
-  • Very Low Birth Weight (<1800g) | 100.0% | 99.8% | 99.2% | 100.0% | 0.999
+  • Very Low Birth Weight (smaller than 1800g) | 100.0% | 99.8% | 99.2% | 100.0% | 0.999
   • Overall Emergency Triage (RED Alert) | 98.2% | 94.6% | 93.8% | 98.5% | 0.978
 
 Transit & Pre-Arrival Impact Metrics

@@ -51,6 +51,19 @@ def clean_text_for_textarea(text):
     # Standardize bullet symbols
     t = re.sub(r'^[ \t]*[-*][ \t]+', '• ', t, flags=re.MULTILINE)
     
+    # Replace arrows
+    t = t.replace('->', ' to ')
+    t = t.replace('<-', ' from ')
+
+    # Replace comparison operators with "smaller than" and "greater than"
+    t = re.sub(r'<=\s*', 'smaller than or equal to ', t)
+    t = re.sub(r'>=\s*', 'greater than or equal to ', t)
+    t = re.sub(r'<\s*', 'smaller than ', t)
+    t = re.sub(r'>\s*', 'greater than ', t)
+
+    # Remove any remaining raw < or > markup characters
+    t = t.replace('<', '').replace('>', '')
+
     # Clean up excessive blank lines
     t = re.sub(r'\n{3,}', '\n\n', t)
     
@@ -101,7 +114,7 @@ def generate_proposal_text():
         
         block = f"{'='*80}\n"
         block += f"COPY-PASTE BLOCK: FIELD {field_num}{limit_str} — {field_header}\n"
-        block += f"Actual Word Count: {word_count} words (STRICTLY <= 500 WORDS)\n"
+        block += f"Actual Word Count: {word_count} words (STRICTLY WITHIN 500 WORDS)\n"
         block += f"{'='*80}\n\n"
         block += cleaned_body + "\n\n"
         

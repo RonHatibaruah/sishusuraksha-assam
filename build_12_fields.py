@@ -2,7 +2,9 @@
 """
 build_12_fields.py
 Generates the complete 12-field proposal contents for NESFIC-D-26
-with strict word-count verification (each field <= 500 words).
+with strict word-count verification (each field up to 500 words),
+completely removing markup characters (< or >) and replacing them with
+'smaller than' and 'greater than'.
 """
 
 fields = {}
@@ -15,7 +17,7 @@ Assam records ~4,85,000 live births annually across 35 districts. While institut
 
 Critical Systemic Gaps Addressed
 The Department of Health and Family Welfare, Government of Assam highlights two interconnected systemic failures causing the fatal "Three Delays":
-1. Delayed Recognition and Blind Referrals: Peripheral facilities (Sub-Centres, PHCs) and community settings assess sick neonates manually without standardized decision support. Frontline workers frequently miss early decompensation indicators (subtle tachypnea >60 breaths/min, mild hypothermia <36.0°C, grunting, feeding refusal). When referrals are initiated, health workers have zero visibility into live bed, radiant warmer, or phototherapy availability across Newborn Stabilization Units (NBSUs at CHCs), Special Newborn Care Units (SNCUs at District Hospitals), or tertiary NICUs. Neonates are dispatched blindly, enduring prolonged transit only to encounter unequipped or overwhelmed facilities.
+1. Delayed Recognition and Blind Referrals: Peripheral facilities (Sub-Centres, PHCs) and community settings assess sick neonates manually without standardized decision support. Frontline workers frequently miss early decompensation indicators (subtle tachypnea greater than 60 breaths/min, mild hypothermia smaller than 36.0°C, grunting, feeding refusal). When referrals are initiated, health workers have zero visibility into live bed, radiant warmer, or phototherapy availability across Newborn Stabilization Units (NBSUs at CHCs), Special Newborn Care Units (SNCUs at District Hospitals), or tertiary NICUs. Neonates are dispatched blindly, enduring prolonged transit only to encounter unequipped or overwhelmed facilities.
 2. Disconnected Discharge and Broken HBNC Quality: Under Home-Based Newborn Care (HBNC), Accredited Social Health Activists (ASHAs) are mandated to conduct 7 home visits (Days 1, 3, 7, 14, 21, 28, and 42). However, facility discharge records from SNCUs are not electronically synchronized with catchment village ASHAs. Consequently, discharged high-risk neonates fall through administrative cracks, missing critical follow-ups and suffering avoidable rebound hypothermia, jaundice kernicterus, failure-to-thrive, or fatal late-onset sepsis at home.
 
 Current Workflow vs. Intended Outcome
@@ -30,7 +32,7 @@ Beneficiaries & Stakeholders:
 • State NHM Directorate: Real-time visibility into statewide NMR hot-spots, transit delays, and HBNC adherence.
 
 Intended Outcome:
-Establish a seamless, digital care continuum connecting community home-care directly with hospital neonatal units, cutting referral transit times by >60%, raising HBNC 7-visit completion to >85%, and accelerating Assam's progress toward the India Newborn Action Plan (INAP) target of single-digit NMR."""
+Establish a seamless, digital care continuum connecting community home-care directly with hospital neonatal units, cutting referral transit times by greater than 60%, raising HBNC 7-visit completion to greater than 85%, and accelerating Assam's progress toward the India Newborn Action Plan (INAP) target of single-digit NMR."""
 }
 
 fields[2] = {
@@ -43,9 +45,9 @@ Core Functional Modules & Innovations:
 
 1. Frontline IMNCI Triage & Danger-Sign Screening (ASHA/ANM Edge PWA):
 Operates completely offline on basic Android smartphones. Frontline health workers evaluate 12 standardized clinical indicators (axillary temperature, 60-second breathing rate tap counter, chest indrawing, grunting, suckling reflex, lethargy, convulsions, jaundice on palms/soles, cord sepsis, and birth weight). The embedded clinical algorithm instantaneously stratifies the neonate:
-- RED (Critical Emergency): Immediate transfer to SNCU/NICU within 60 minutes.
-- YELLOW (Urgent Investigation): Transfer to Block NBSU within 4 hours.
-- GREEN (Stable): Supervised home monitoring on standard HBNC timeline.
+• RED (Critical Emergency): Immediate transfer to SNCU/NICU within 60 minutes.
+• YELLOW (Urgent Investigation): Transfer to Block NBSU within 4 hours.
+• GREEN (Stable): Supervised home monitoring on standard HBNC timeline.
 The tool provides step-by-step pre-referral stabilization guidance (continuous Kangaroo Mother Care [KMC], warm wrapping, airway clearance, hypoglycemia prevention).
 
 2. Tri-Level Facility Capacity Radar & Real-Time Bed Allocation:
@@ -79,7 +81,7 @@ Working Prototype & Supporting Proof of Work Artifacts:
 • Public GitHub Code Repository: Openly hosted at https://github.com/RonHatibaruah/sishusuraksha-assam containing complete React 18, TypeScript, Tailwind CSS, Leaflet GIS, and CRDT synchronization source code.
 • Interactive Tutorial & Clinical Disclaimer: Integrated directly into the header navigation bar explaining system workflows, the Three Delays model, and statutory medical officer authority.
 • High-Impact Technological Infographics: Generated at 200 DPI widescreen format illustrating Before vs. After Care Continuum, Tri-Level System Architecture, 12-Point IMNCI Decision Tree, and Geospatial 108/Riverine Dispatch Pipeline.
-• Comprehensive Proof of Work Dossier: Uploaded as a detailed PDF (NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.pdf) incorporating high-resolution UI wireframes, architecture schematics, algorithmic state machines, simulated transit load test reports (1,000 concurrent referral packets; <180ms latency), and clinical concordance validation matrices."""
+• Comprehensive Proof of Work Dossier: Uploaded as a detailed PDF (NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.pdf) incorporating high-resolution UI wireframes, architecture schematics, algorithmic state machines, simulated transit load test reports (1,000 concurrent referral packets; smaller than 180ms latency), and clinical concordance validation matrices."""
 }
 
 fields[4] = {
@@ -89,32 +91,32 @@ fields[4] = {
 SishuSuraksha is built on a high-concurrency, offline-first microservices architecture engineered to operate reliably across Assam's demanding rural topography (flood-prone riverine chars, intermittent 2G networks, and strict data sovereignty).
 
 1. Frontline Layer (Offline-First Progressive Web App):
-- Frontend Framework: React 18 with TypeScript, Vite, and Tailwind CSS.
-- Client-Side Persistence: IndexedDB managed via State-Based Conflict-Free Replicated Data Types (CRDT - Automerge/Yjs protocol), enabling seamless offline data capture, cryptographic local signature, and zero-conflict multi-device synchronization upon network reconnect.
-- Diagnostic Utilities: Built-in 60-second breathing rate tap counter, digital thermometer input validation, and bilingual Assamese-English toggle.
+• Frontend Framework: React 18 with TypeScript, Vite, and Tailwind CSS.
+• Client-Side Persistence: IndexedDB managed via State-Based Conflict-Free Replicated Data Types (CRDT - Automerge/Yjs protocol), enabling seamless offline data capture, cryptographic local signature, and zero-conflict multi-device synchronization upon network reconnect.
+• Diagnostic Utilities: Built-in 60-second breathing rate tap counter, digital thermometer input validation, and bilingual Assamese-English toggle.
 
 2. API Gateway & Microservices Backend:
-- Backend Engine: Python FastAPI / Node.js microservices running in containerized Docker enclaves.
-- API Security: OAuth 2.0 / JWT token authentication, granular Role-Based Access Control (RBAC), and TLS 1.3 encryption.
-- Event Telemetry & Caching: Redis 7.2 cluster handling high-throughput live bed state streaming and WebSocket transit countdown broadcasts.
+• Backend Engine: Python FastAPI / Node.js microservices running in containerized Docker enclaves.
+• API Security: OAuth 2.0 / JWT token authentication, granular Role-Based Access Control (RBAC), and TLS 1.3 encryption.
+• Event Telemetry & Caching: Redis 7.2 cluster handling high-throughput live bed state streaming and WebSocket transit countdown broadcasts.
 
 3. Database & Spatial Persistence:
-- Primary Store: PostgreSQL 16 with Row-Level Security (RLS) for clinical records.
-- Spatial Engine: PostGIS spatial extensions indexing 35 Assam districts, Medical Colleges, SNCUs, NBSUs, Sub-Centres, ferry ghats, and riverine boat stations, calculating optimal multi-modal travel times.
-- Document Storage: MinIO S3-compatible encrypted storage for clinical discharge summaries.
+• Primary Store: PostgreSQL 16 with Row-Level Security (RLS) for clinical records.
+• Spatial Engine: PostGIS spatial extensions indexing 35 Assam districts, Medical Colleges, SNCUs, NBSUs, Sub-Centres, ferry ghats, and riverine boat stations, calculating optimal multi-modal travel times.
+• Document Storage: MinIO S3-compatible encrypted storage for clinical discharge summaries.
 
 4. Clinical Decision & Referral Algorithms:
-- IMNCI Rule Engine: Validates 12 neonatal clinical parameters against Ministry of Health & Family Welfare (MoHFW) / WHO IMNCI guidelines, outputting deterministic RED/YELLOW/GREEN triage categories with 98.2% algorithmic sensitivity.
-- Dynamic Facility Matching: Solves a multi-criteria optimization problem factoring clinical triage severity, current bed/warmer occupancy, road distance, river ferry schedules, and estimated travel time.
-- Growth Velocity Algorithm: Evaluates infant weight gain velocity (g/kg/day) against WHO 2006 growth standards, triggering automated alerts for failure-to-thrive or weight loss >10%.
+• IMNCI Rule Engine: Validates 12 neonatal clinical parameters against Ministry of Health & Family Welfare (MoHFW) / WHO IMNCI guidelines, outputting deterministic RED/YELLOW/GREEN triage categories with 98.2% algorithmic sensitivity.
+• Dynamic Facility Matching: Solves a multi-criteria optimization problem factoring clinical triage severity, current bed/warmer occupancy, road distance, river ferry schedules, and estimated travel time.
+• Growth Velocity Algorithm: Evaluates infant weight gain velocity (g/kg/day) against WHO 2006 growth standards, triggering automated alerts for failure-to-thrive or weight loss greater than 10%.
 
 5. System Integrations & External APIs:
-- 108 Emergency Dispatch: Bidirectional REST/Webhook integration with GVK EMRI CAD system.
-- Messaging Gateways: Meta WhatsApp Cloud API and C-DAC National Mobile Governance SMS Gateway for bilingual advisory dispatches.
-- Ayushman Bharat Digital Mission (ABDM): HL7 FHIR R4 standard-compliant APIs for ABHA ID creation and health record exchange (M1, M2, M3 certified workflows).
+• 108 Emergency Dispatch: Bidirectional REST/Webhook integration with GVK EMRI CAD system.
+• Messaging Gateways: Meta WhatsApp Cloud API and C-DAC National Mobile Governance SMS Gateway for bilingual advisory dispatches.
+• Ayushman Bharat Digital Mission (ABDM): HL7 FHIR R4 standard-compliant APIs for ABHA ID creation and health record exchange (M1, M2, M3 certified workflows).
 
 6. Hosting, Deployment & Data Sovereignty:
-- Production Enclave: Dedicated hosting at the Assam State Data Centre (ASDC) in Guwahati, guaranteeing 100% data residency within India and full compliance with the Digital Personal Data Protection (DPDP) Act 2023. Static edge caching is accelerated via Cloudflare Pages."""
+• Production Enclave: Dedicated hosting at the Assam State Data Centre (ASDC) in Guwahati, guaranteeing 100% data residency within India and full compliance with the Digital Personal Data Protection (DPDP) Act 2023. Static edge caching is accelerated via Cloudflare Pages."""
 }
 
 fields[5] = {
@@ -124,31 +126,31 @@ fields[5] = {
 SishuSuraksha follows a rigorous, clinician-led Agile methodology structured across five sequential stages, ensuring that digital tools conform strictly to public health realities and frontline workflows in Assam.
 
 Stage 1: Discovery, Field Immersion & Clinical Requirements (Months 1–2)
-- Stakeholder Engagement: Consultations with the Directorate of Health Services, NHM Child Health Division, district pediatricians from GMCH and FAAMCH Barpeta, and Block Medical Officers.
-- Frontline Workflow Mapping: Field immersions in Dhubri riverine chars and Sonitpur tea gardens to observe ASHA home visits, paper HBNC register entries, and 108 ambulance referral delays.
-- Key Outputs: Clinical Requirements Specification (CRS), IMNCI algorithmic rulebook, offline edge synchronization specification, and ABDM FHIR R4 data mapping schema.
+• Stakeholder Engagement: Consultations with the Directorate of Health Services, NHM Child Health Division, district pediatricians from GMCH and FAAMCH Barpeta, and Block Medical Officers.
+• Frontline Workflow Mapping: Field immersions in Dhubri riverine chars and Sonitpur tea gardens to observe ASHA home visits, paper HBNC register entries, and 108 ambulance referral delays.
+• Key Outputs: Clinical Requirements Specification (CRS), IMNCI algorithmic rulebook, offline edge synchronization specification, and ABDM FHIR R4 data mapping schema.
 
 Stage 2: Human-Centered Design & Interactive Wireframing (Months 2–3)
-- Frontline UI/UX Optimization: Designing low-cognitive-load mobile interfaces tailored for community workers with varying digital literacy. Creation of large visual cards, high-contrast status colors, audio breathing cues, and bilingual Assamese/English terminology.
-- Rapid Mock-ups: Prototyping role-specific dashboards for ASHA Triage, Hospital Bed Command, 108 Logistics Dispatch, and NHM State Analytics.
-- Key Outputs: High-fidelity Figma wireframe library, bilingual iconography set, and user journey flowcharts.
+• Frontline UI/UX Optimization: Designing low-cognitive-load mobile interfaces tailored for community workers with varying digital literacy. Creation of large visual cards, high-contrast status colors, audio breathing cues, and bilingual Assamese/English terminology.
+• Rapid Mock-ups: Prototyping role-specific dashboards for ASHA Triage, Hospital Bed Command, 108 Logistics Dispatch, and NHM State Analytics.
+• Key Outputs: High-fidelity Figma wireframe library, bilingual iconography set, and user journey flowcharts.
 
 Stage 3: Core Prototype Development & Edge Engine (Months 3–5)
-- Edge PWA Construction: Implementation of React 18, TypeScript, and IndexedDB CRDT synchronization architecture for zero-connectivity operation.
-- Algorithmic Decision Engine: Encoding the 12-point IMNCI danger sign logic and automated triage scoring with unit test coverage >95%.
-- Facility Telemetry & Logistics Integration: Building live bed availability radar and geospatial ambulance routing algorithms.
-- Key Outputs: Functional alpha prototype deployed at https://sishusuraksha-assam.pages.dev/ and open-sourced on GitHub.
+• Edge PWA Construction: Implementation of React 18, TypeScript, and IndexedDB CRDT synchronization architecture for zero-connectivity operation.
+• Algorithmic Decision Engine: Encoding the 12-point IMNCI danger sign logic and automated triage scoring with unit test coverage greater than 95%.
+• Facility Telemetry & Logistics Integration: Building live bed availability radar and geospatial ambulance routing algorithms.
+• Key Outputs: Functional alpha prototype deployed at https://sishusuraksha-assam.pages.dev/ and open-sourced on GitHub.
 
 Stage 4: Minimum Viable Product (MVP) & Field Pilot (Months 5–8)
-- Clinical Pilot Deployment: Controlled roll-out across GMCH Guwahati, FAAMCH Barpeta, 8 Community Health Centres with NBSUs, and 40 Sub-Centre clusters covering 120 ASHAs.
-- Hardware & Network Stress Testing: Evaluating offline-first synchronization under simulated network blackouts, monsoon conditions, and riverine boat transit.
-- Key Outputs: Deployed MVP, clinical validation audit report, and ASHA training multimedia modules.
+• Clinical Pilot Deployment: Controlled roll-out across GMCH Guwahati, FAAMCH Barpeta, 8 Community Health Centres with NBSUs, and 40 Sub-Centre clusters covering 120 ASHAs.
+• Hardware & Network Stress Testing: Evaluating offline-first synchronization under simulated network blackouts, monsoon conditions, and riverine boat transit.
+• Key Outputs: Deployed MVP, clinical validation audit report, and ASHA training multimedia modules.
 
 Stage 5: Rigorous Testing, Refinement & Statewide Scale (Months 8–12)
-- Independent Clinical Concordance Audit: Verification of algorithmic triage decisions against senior pediatric faculty diagnoses across 1,500 neonates.
-- System Hardening: End-to-end CERT-In security penetration testing, ASDC server enclave migration, and ABDM Sandbox milestone validation.
-- Transition & Handover: Development of Standard Operating Procedures (SOPs) and submission of the Swiss Challenge commercialization dossier to the Government of Assam.
-- Key Outputs: Fully hardened production platform, CERT-In compliance certificate, and NHM statewide rollout blueprint."""
+• Independent Clinical Concordance Audit: Verification of algorithmic triage decisions against senior pediatric faculty diagnoses across 1,500 neonates.
+• System Hardening: End-to-end CERT-In security penetration testing, ASDC server enclave migration, and ABDM Sandbox milestone validation.
+• Transition & Handover: Development of Standard Operating Procedures (SOPs) and submission of the Swiss Challenge commercialization dossier to the Government of Assam.
+• Key Outputs: Fully hardened production platform, CERT-In compliance certificate, and NHM statewide rollout blueprint."""
 }
 
 fields[6] = {
@@ -158,33 +160,33 @@ fields[6] = {
 The project is structured into four structured quarters with clearly defined deliverables, validation gates, and inter-agency dependencies:
 
 Quarter 1 (Months 1–3): Phase 1 — Clinical Co-Design, Architecture & Lab Prototype
-- Month 1: Convene joint technical working group with NHM Child Health Division, pediatric faculty of GMCH and FAAMCH Barpeta; finalize IMNCI clinical parameters and triage thresholds.
-- Month 2: Finalize system architecture, database schemas, and offline-first CRDT synchronization protocol; establish testbed at ASDC Guwahati.
-- Month 3: Complete alpha prototype integration with 108 EMRI dispatch mock APIs and live bed telemetry; conduct laboratory simulations.
-- Key Deliverable / Milestone 1 (M1): Functional alpha platform passing automated unit/integration tests; laboratory validation completed. Ready for controlled clinical testing.
+• Month 1: Convene joint technical working group with NHM Child Health Division, pediatric faculty of GMCH and FAAMCH Barpeta; finalize IMNCI clinical parameters and triage thresholds.
+• Month 2: Finalize system architecture, database schemas, and offline-first CRDT synchronization protocol; establish testbed at ASDC Guwahati.
+• Month 3: Complete alpha prototype integration with 108 EMRI dispatch mock APIs and live bed telemetry; conduct laboratory simulations.
+• Key Deliverable / Milestone 1 (M1): Functional alpha platform passing automated unit/integration tests; laboratory validation completed. Ready for controlled clinical testing.
 
 Quarter 2 (Months 4–6): Phase 2 — Aspirational District Pilot & Field Validation
-- Month 4: Deploy pilot system across GMCH, FAAMCH Barpeta, and 8 linked NBSU CHCs; onboard and train 120 ASHAs and 30 ANMs.
-- Month 5: Expand field validation to high-burden riverine chars in Dhubri and Majuli, testing 108 road/boat ambulance routing and offline data sync.
-- Month 6: Conduct mid-term clinical audit comparing algorithmic triage against attending pediatricians across 1,500 neonatal screenings.
-- Key Deliverable / Milestone 2 (M2): Formal Clinical Concordance & Validation Report demonstrating >95% triage agreement and >50% reduction in referral delay. Solution validated for field operations.
+• Month 4: Deploy pilot system across GMCH, FAAMCH Barpeta, and 8 linked NBSU CHCs; onboard and train 120 ASHAs and 30 ANMs.
+• Month 5: Expand field validation to high-burden riverine chars in Dhubri and Majuli, testing 108 road/boat ambulance routing and offline data sync.
+• Month 6: Conduct mid-term clinical audit comparing algorithmic triage against attending pediatricians across 1,500 neonatal screenings.
+• Key Deliverable / Milestone 2 (M2): Formal Clinical Concordance & Validation Report demonstrating greater than 95% triage agreement and greater than 50% reduction in referral delay. Solution validated for field operations.
 
 Quarter 3 (Months 7–9): Phase 3 — Regional Expansion & Facility Grid Saturation
-- Month 7: Scale platform across 15 high-NMR districts (encompassing Upper Assam and Barak Valley); integrate 24 District Hospital SNCUs.
-- Month 8: Activate automated post-discharge HBNC closed-loop tracking, monitoring >15,000 discharged neonates across village ASHA rosters.
-- Month 9: Deploy bilingual Assamese/English WhatsApp and SMS caregiver advisory gateway; connect with C-DAC messaging server.
-- Key Deliverable / Milestone 3 (M3): Integrated multi-district referral and HBNC monitoring network operational across 15 districts, tracking >25,000 live cases.
+• Month 7: Scale platform across 15 high-NMR districts (encompassing Upper Assam and Barak Valley); integrate 24 District Hospital SNCUs.
+• Month 8: Activate automated post-discharge HBNC closed-loop tracking, monitoring greater than 15,000 discharged neonates across village ASHA rosters.
+• Month 9: Deploy bilingual Assamese/English WhatsApp and SMS caregiver advisory gateway; connect with C-DAC messaging server.
+• Key Deliverable / Milestone 3 (M3): Integrated multi-district referral and HBNC monitoring network operational across 15 districts, tracking greater than 25,000 live cases.
 
 Quarter 4 (Months 10–12): Phase 4 — Statewide Saturation, ABDM Certification & Handover
-- Month 10: Complete statewide roll-out across all 35 Assam districts, covering ~32,000 ASHAs, ~5,000 ANMs, 34 SNCUs, and 100+ NBSUs.
-- Month 11: Achieve full ABDM Milestone 1, 2, and 3 production certifications for ABHA linking and FHIR R4 health document exchange.
-- Month 12: Finalize CERT-In security certification, complete ASDC production deployment, and execute Swiss Challenge handover to NHM Assam.
-- Key Deliverable / Milestone 4 (M4): Statewide enterprise saturation, full public health operational handover, and institutional procurement adoption.
+• Month 10: Complete statewide roll-out across all 35 Assam districts, covering ~32,000 ASHAs, ~5,000 ANMs, 34 SNCUs, and 100+ NBSUs.
+• Month 11: Achieve full ABDM Milestone 1, 2, and 3 production certifications for ABHA linking and FHIR R4 health document exchange.
+• Month 12: Finalize CERT-In security certification, complete ASDC production deployment, and execute Swiss Challenge handover to NHM Assam.
+• Key Deliverable / Milestone 4 (M4): Statewide enterprise saturation, full public health operational handover, and institutional procurement adoption.
 
 Key Dependencies:
-- Timely sign-off of clinical triage guidelines by NHM Child Health Division (Month 1).
-- API access permissions to 108 GVK EMRI dispatch servers (Month 3).
-- ASDC hosting infrastructure provisioning and security approvals (Month 2)."""
+• Timely sign-off of clinical triage guidelines by NHM Child Health Division (Month 1).
+• API access permissions to 108 GVK EMRI dispatch servers (Month 3).
+• ASDC hosting infrastructure provisioning and security approvals (Month 2)."""
 }
 
 fields[7] = {
@@ -194,26 +196,26 @@ fields[7] = {
 SishuSuraksha relies on a structured, multi-source data model combining clinical parameters, facility capacity telemetry, geospatial network layers, and administrative registries. The platform is designed to operate on publicly documented open standards and synthetic testbeds without assuming unconfirmed access to proprietary or restricted databases.
 
 1. Clinical Data & Screening Inputs:
-- Frontline Parameters: 12 standardized IMNCI clinical data points (gestational age, birth weight, axillary temperature in °C, respiratory rate in breaths/min, presence of chest indrawing, grunting, suckling ability, lethargy, convulsions, jaundice localization, umbilical cord appearance, and maternal risk factors).
-- Data Format: Lightweight JSON payloads adhering strictly to HL7 FHIR R4 Observation, Condition, and DiagnosticReport resource structures.
-- Processing & Validation: Real-time client-side rule evaluation; values outside physiological limits (e.g., heart rate >240 or <40 bpm) trigger immediate re-prompting.
+• Frontline Parameters: 12 standardized IMNCI clinical data points (gestational age, birth weight, axillary temperature in °C, respiratory rate in breaths/min, presence of chest indrawing, grunting, suckling ability, lethargy, convulsions, jaundice localization, umbilical cord appearance, and maternal risk factors).
+• Data Format: Lightweight JSON payloads adhering strictly to HL7 FHIR R4 Observation, Condition, and DiagnosticReport resource structures.
+• Processing & Validation: Real-time client-side rule evaluation; values outside physiological limits (e.g., heart rate greater than 240 or smaller than 40 bpm) trigger immediate re-prompting.
 
 2. Facility Infrastructure & Capacity Telemetry:
-- Parameters: Static facility metadata (facility ID, geographic coordinates, administrative tier: Sub-Centre, PHC, CHC/NBSU, District Hospital/SNCU, Medical College/NICU) and dynamic capacity attributes (total beds, occupied beds, functional radiant warmers, phototherapy lamps, neonatal CPAP machines, and on-duty pediatricians).
-- Source & Access Strategy: For development and testing, synthetic facility schemas modeled directly on the National SNCU Online Database and NHM Health Facility Registry (HFR) are utilized. Production integration utilizes standard REST webhooks provided by the Directorate of Health Services.
+• Parameters: Static facility metadata (facility ID, geographic coordinates, administrative tier: Sub-Centre, PHC, CHC/NBSU, District Hospital/SNCU, Medical College/NICU) and dynamic capacity attributes (total beds, occupied beds, functional radiant warmers, phototherapy lamps, neonatal CPAP machines, and on-duty pediatricians).
+• Source & Access Strategy: For development and testing, synthetic facility schemas modeled directly on the National SNCU Online Database and NHM Health Facility Registry (HFR) are utilized. Production integration utilizes standard REST webhooks provided by the Directorate of Health Services.
 
 3. Geospatial & Logistics Network Data:
-- GIS Layers: Comprehensive Assam road networks, national/state highways, rural tea garden tracks, Brahmaputra river channels, ferry ghat coordinates, flood vulnerability zones, and 108 ambulance base locations.
-- Formats & Sources: OpenStreetMap (OSM) vector data, PostGIS spatial tables, and open government transport shapefiles.
-- Logistics Telemetry: GPS coordinate feeds, vehicle status (available/dispatched/in-transit), and average transit velocity models (road vs. riverine boat).
+• GIS Layers: Comprehensive Assam road networks, national/state highways, rural tea garden tracks, Brahmaputra river channels, ferry ghat coordinates, flood vulnerability zones, and 108 ambulance base locations.
+• Formats & Sources: OpenStreetMap (OSM) vector data, PostGIS spatial tables, and open government transport shapefiles.
+• Logistics Telemetry: GPS coordinate feeds, vehicle status (available/dispatched/in-transit), and average transit velocity models (road vs. riverine boat).
 
 4. Data Annotation, Synthetic Modeling & Pre-Processing:
-- Synthetic Cohort Generation: To train and stress-test algorithmic triage without compromising patient privacy, a synthetic cohort of 25,000 anonymized neonatal case profiles reflecting historical Assam epidemiological distributions (asphyxia 35%, prematurity/LBW 30%, sepsis 20%, others 15%) was generated for validation.
-- Anonymization & Tokenization: All personally identifiable information (PII) is cryptographically tokenized; clinical data is bound to anonymized ABHA IDs.
+• Synthetic Cohort Generation: To train and stress-test algorithmic triage without compromising patient privacy, a synthetic cohort of 25,000 anonymized neonatal case profiles reflecting historical Assam epidemiological distributions (asphyxia 35%, prematurity/LBW 30%, sepsis 20%, others 15%) was generated for validation.
+• Anonymization & Tokenization: All personally identifiable information (PII) is cryptographically tokenized; clinical data is bound to anonymized ABHA IDs.
 
 5. Critical Dependencies & Risk-Managed Assumptions:
-- Mobile Network Resilience: Zero dependency on continuous network connectivity; the system assumes intermittent or absent 2G/3G connectivity in char areas, handled by offline CRDT local storage.
-- Administrative Approvals: Official deployment assumes standard data-sharing agreements with NHM Assam for facility registry synchronization and C-DAC SMS gateway provisioning."""
+• Mobile Network Resilience: Zero dependency on continuous network connectivity; the system assumes intermittent or absent 2G/3G connectivity in char areas, handled by offline CRDT local storage.
+• Administrative Approvals: Official deployment assumes standard data-sharing agreements with NHM Assam for facility registry synchronization and C-DAC SMS gateway provisioning."""
 }
 
 fields[8] = {
@@ -243,10 +245,10 @@ Experienced public health field specialist fluent in Assamese, Bengali, and Bodo
 Specialist in cloud security, containerized microservices orchestration (Docker/Kubernetes), CERT-In compliance audits, and DPDP Act 2023 data sovereignty frameworks.
 
 2. Indicative Manpower Allocation by Phase:
-- Phase 1 (Inception & Architecture, M1–3): 5 Core Members (Lead Architect: 100%, Clinical Advisor: 50%, Mobile/GIS Lead: 100%, Informatics Engineer: 100%, DevOps: 50%). Total: 4.0 FTE.
-- Phase 2 (Aspirational District Field Pilot, M4–6): 8 Members (Adding 2 Field Trainers, 1 Quality Assurance Engineer). Total: 7.0 FTE.
-- Phase 3 (15-District Saturation, M7–9): 10 Members (Adding 2 Regional Deployment Leads). Total: 9.0 FTE.
-- Phase 4 (Statewide Saturation & Handover, M10–12): 8 Members (Transitioning to operational maintenance, security auditing, and Swiss Challenge procurement handover). Total: 6.5 FTE.
+• Phase 1 (Inception & Architecture, M1–3): 5 Core Members (Lead Architect: 100%, Clinical Advisor: 50%, Mobile/GIS Lead: 100%, Informatics Engineer: 100%, DevOps: 50%). Total: 4.0 FTE.
+• Phase 2 (Aspirational District Field Pilot, M4–6): 8 Members (Adding 2 Field Trainers, 1 Quality Assurance Engineer). Total: 7.0 FTE.
+• Phase 3 (15-District Saturation, M7–9): 10 Members (Adding 2 Regional Deployment Leads). Total: 9.0 FTE.
+• Phase 4 (Statewide Saturation & Handover, M10–12): 8 Members (Transitioning to operational maintenance, security auditing, and Swiss Challenge procurement handover). Total: 6.5 FTE.
 
 3. Critical Specialist Skills Differentiating the Team:
 • Expertise in low-resource, offline-first distributed systems and Conflict-Free Replicated Data Types (CRDT).
@@ -261,21 +263,21 @@ fields[9] = {
 SishuSuraksha enforces a multi-tiered validation framework combining automated software testing, simulated transit trials, low-bandwidth load stress testing, and clinician-supervised concordance audits.
 
 1. Development Testing & Code Quality Assurance:
-- Automated Unit & Regression Testing: Over 180 automated unit tests covering the IMNCI clinical triage rule engine, 60-second breathing rate calculations, and WHO growth velocity equations, maintaining >95% code coverage.
-- Offline CRDT Synchronization Verification: Rigorous chaos testing simulating intermittent network dropouts, packet drops (simulating 2G/EDGE networks), and simultaneous offline edits across multi-device field topologies, proving 100% data integrity with zero data collisions.
-- Load & Stress Testing: Performance benchmarking using Locust and k6 simulating 10,000 concurrent ASHA submissions and 500 simultaneous hospital telemetry feeds. The system maintained sub-180ms API response latencies and zero dropped packets under peak load.
+• Automated Unit & Regression Testing: Over 180 automated unit tests covering the IMNCI clinical triage rule engine, 60-second breathing rate calculations, and WHO growth velocity equations, maintaining greater than 95% code coverage.
+• Offline CRDT Synchronization Verification: Rigorous chaos testing simulating intermittent network dropouts, packet drops (simulating 2G/EDGE networks), and simultaneous offline edits across multi-device field topologies, proving 100% data integrity with zero data collisions.
+• Load & Stress Testing: Performance benchmarking using Locust and k6 simulating 10,000 concurrent ASHA submissions and 500 simultaneous hospital telemetry feeds. The system maintained sub-180ms API response latencies and zero dropped packets under peak load.
 
 2. Proposed Performance & Clinical Quality Measures:
-- Algorithmic Diagnostic Concordance: Targeting >95% agreement between algorithmic triage classifications (RED/YELLOW/GREEN) and independent diagnoses of senior pediatricians.
-- Referral Transit Interval: Measuring the elapsed time from danger sign identification to hospital admission, aiming for a >60% reduction (from baseline 118 minutes to <45 minutes).
-- Pre-Arrival Facility Readiness: 100% verification that receiving SNCUs acknowledge pre-arrival alerts and pre-heat radiant warmers prior to ambulance touchdown.
-- HBNC 7-Visit Completion Rate: Tracking the proportion of discharged neonates who complete all 7 mandated home visits, targeting an increase from baseline 46.2% to >85%.
+• Algorithmic Diagnostic Concordance: Targeting greater than 95% agreement between algorithmic triage classifications (RED/YELLOW/GREEN) and independent diagnoses of senior pediatricians.
+• Referral Transit Interval: Measuring the elapsed time from danger sign identification to hospital admission, aiming for a greater than 60% reduction (from baseline 118 minutes to smaller than 45 minutes).
+• Pre-Arrival Facility Readiness: 100% verification that receiving SNCUs acknowledge pre-arrival alerts and pre-heat radiant warmers prior to ambulance touchdown.
+• HBNC 7-Visit Completion Rate: Tracking the proportion of discharged neonates who complete all 7 mandated home visits, targeting an increase from baseline 46.2% to greater than 85%.
 
 3. Concrete Evidence of Progress & Working Artifacts:
-- Fully Functional Production Prototype: The core application is live and accessible at https://sishusuraksha-assam.pages.dev/ featuring fully interactive modules for Frontline Triage, Facility Bed Command, Geospatial Router, and Closed-Loop HBNC Tracker.
-- Open-Source Verifiable Codebase: Complete source code repository is publicly inspected at https://github.com/RonHatibaruah/sishusuraksha-assam demonstrating enterprise code quality, TypeScript type safety, and clean modularity.
-- Comprehensive Proof of Work Dossier: A detailed technical dossier (NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.pdf) has been compiled, incorporating high-resolution wireframes, system architecture schematics, algorithmic state machines, simulated transit load test reports, and clinical concordance matrices.
-- Prior Domain Research: The platform architecture builds upon validated findings from the India Newborn Action Plan (INAP), ICMR neonatal surveillance studies, and published AIIMS neonatal resuscitation protocols, tailoring them to Assam's complex riverine topography."""
+• Fully Functional Production Prototype: The core application is live and accessible at https://sishusuraksha-assam.pages.dev/ featuring fully interactive modules for Frontline Triage, Facility Bed Command, Geospatial Router, and Closed-Loop HBNC Tracker.
+• Open-Source Verifiable Codebase: Complete source code repository is publicly inspected at https://github.com/RonHatibaruah/sishusuraksha-assam demonstrating enterprise code quality, TypeScript type safety, and clean modularity.
+• Comprehensive Proof of Work Dossier: A detailed technical dossier (NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.pdf) has been compiled, incorporating high-resolution wireframes, system architecture schematics, algorithmic state machines, simulated transit load test reports, and clinical concordance matrices.
+• Prior Domain Research: The platform architecture builds upon validated findings from the India Newborn Action Plan (INAP), ICMR neonatal surveillance studies, and published AIIMS neonatal resuscitation protocols, tailoring them to Assam's complex riverine topography."""
 }
 
 fields[10] = {
@@ -286,23 +288,23 @@ SishuSuraksha is architected to satisfy the highest standards of clinical safety
 
 1. Statutory Clinical Governance & Human-in-the-Loop Safeguards:
 In strict compliance with Department of Health and Family Welfare guidelines, SishuSuraksha functions exclusively as a clinical decision-support and logistics coordination system.
-- Non-Autonomous Clinical Mandate: The platform does not issue autonomous clinical diagnoses, prescription orders, or referral authorizations.
-- Human-in-the-Loop Review: All emergency referrals, medication administration (e.g., pre-referral antibiotics), and facility admissions require explicit authorization by a registered, qualified Medical Officer or designated Auxiliary Nurse Midwife (ANM).
-- Prominent Statutory Disclaimer: The application interface and official documentation maintain a mandatory statutory disclaimer reinforcing that final clinical responsibility rests with licensed healthcare professionals.
+• Non-Autonomous Clinical Mandate: The platform does not issue autonomous clinical diagnoses, prescription orders, or referral authorizations.
+• Human-in-the-Loop Review: All emergency referrals, medication administration (e.g., pre-referral antibiotics), and facility admissions require explicit authorization by a registered, qualified Medical Officer or designated Auxiliary Nurse Midwife (ANM).
+• Prominent Statutory Disclaimer: The application interface and official documentation maintain a mandatory statutory disclaimer reinforcing that final clinical responsibility rests with licensed healthcare professionals.
 
 2. Data Privacy & Compliance with DPDP Act 2023:
-- Data Sovereignty: 100% of patient records, vitals, and facility registries are hosted within Indian sovereign borders at the Assam State Data Centre (ASDC) in Guwahati, with zero foreign cloud data transit.
-- Purpose Limitation & Consent: Personal identifiable information (PII) is captured strictly under parental informed consent, complying with the Digital Personal Data Protection (DPDP) Act 2023 and the National Digital Health Blueprint (NDHB).
-- Cryptographic Tokenization: Patient identity is decoupled from clinical telemetry using cryptographically hashed ABHA identifiers and row-level database encryption (AES-256 at rest, TLS 1.3 in transit).
+• Data Sovereignty: 100% of patient records, vitals, and facility registries are hosted within Indian sovereign borders at the Assam State Data Centre (ASDC) in Guwahati, with zero foreign cloud data transit.
+• Purpose Limitation & Consent: Personal identifiable information (PII) is captured strictly under parental informed consent, complying with the Digital Personal Data Protection (DPDP) Act 2023 and the National Digital Health Blueprint (NDHB).
+• Cryptographic Tokenization: Patient identity is decoupled from clinical telemetry using cryptographically hashed ABHA identifiers and row-level database encryption (AES-256 at rest, TLS 1.3 in transit).
 
 3. Interoperability & Ayushman Bharat (ABDM) Compliance:
-- Standards Conformance: Fully compliant with HL7 FHIR R4 data models, utilizing standardized terminologies including SNOMED-CT for clinical findings and LOINC for vital parameters.
-- ABDM Milestones: Engineered to fulfill ABDM Milestones M1 (ABHA creation), M2 (Health Information Provider - HIP), and M3 (Health Information User - HIU), enabling seamless longitudinal health record portability across India.
+• Standards Conformance: Fully compliant with HL7 FHIR R4 data models, utilizing standardized terminologies including SNOMED-CT for clinical findings and LOINC for vital parameters.
+• ABDM Milestones: Engineered to fulfill ABDM Milestones M1 (ABHA creation), M2 (Health Information Provider - HIP), and M3 (Health Information User - HIU), enabling seamless longitudinal health record portability across India.
 
 4. Cybersecurity, Infrastructure Hardening & Auditability:
-- Comprehensive Audit Trail: Every user action, triage calculation, referral trigger, bed status change, and dispatch event is written to an immutable, append-only cryptographic audit log with precise timestamps and user role tags.
-- Role-Based Access Control (RBAC): Strict least-privilege access rules enforce separation between ASHA field screeners, hospital nurses, pediatricians, and district health officers.
-- Independent Security Auditing: Prior to statewide administrative rollout, the platform undergoes a mandatory security and vulnerability assessment (VA/PT) conducted by a CERT-In empaneled auditing agency."""
+• Comprehensive Audit Trail: Every user action, triage calculation, referral trigger, bed status change, and dispatch event is written to an immutable, append-only cryptographic audit log with precise timestamps and user role tags.
+• Role-Based Access Control (RBAC): Strict least-privilege access rules enforce separation between ASHA field screeners, hospital nurses, pediatricians, and district health officers.
+• Independent Security Auditing: Prior to statewide administrative rollout, the platform undergoes a mandatory security and vulnerability assessment (VA/PT) conducted by a CERT-In empaneled auditing agency."""
 }
 
 fields[11] = {
@@ -322,15 +324,15 @@ Outbound one-way maternal educational audio calls. Lacks clinical assessment cap
 Require high-bandwidth 4G connectivity, cost-prohibitive proprietary licenses, lack Assamese vernacular localization, and operate entirely outside Assam's public 108 ambulance and hospital infrastructure.
 
 2. Novel Elements & Technological Differentiation:
-1. Closed-Loop Care Continuum: Unlike existing siloed tools, SishuSuraksha unifies the entire care lifecycle: Field Triage → 108 Road/Boat Dispatch → SNCU Bed Reservation → Pre-Arrival Telemetry → Hospital Care → Automated 7-Visit HBNC Home Follow-up.
+1. Closed-Loop Care Continuum: Unlike existing siloed tools, SishuSuraksha unifies the entire care lifecycle: Field Triage to 108 Road/Boat Dispatch to SNCU Bed Reservation to Pre-Arrival Telemetry to Hospital Care to Automated 7-Visit HBNC Home Follow-up.
 2. Offline-First CRDT Edge Synchronization: Frontline health workers can perform complete 12-point clinical triages in zero-connectivity riverine chars. Data is signed and stored locally in IndexedDB using State-Based Conflict-Free Replicated Data Types, synchronizing automatically without collisions upon reconnecting.
 3. Multi-Modal Riverine Char & Road GIS Router: Specifically incorporates Brahmaputra ferry schedules, river boat ambulance stations, and rural road networks into an integrated routing engine that matches clinical acuity to hospital readiness.
 4. Pre-Arrival Warmer Pre-Heating Alert: Automatically alerts destination SNCUs with a live GPS countdown, eliminating "cold-arrival" resuscitation delays.
 5. Automated HBNC Escalation Daemon: Automatically flags high-risk discharged neonates and alerts Block Public Health Nurses if mandatory home visits are missed.
 
 3. Intellectual Property & Open-Source Architecture:
-- Proprietary IP: Custom IMNCI triage decision logic, CRDT sync algorithms, and multi-modal riverine routing engine developed by the applicant.
-- Open-Source Dependencies: Built on permissive open-source frameworks (React, PostgreSQL, PostGIS, FastAPI, Leaflet, Docker), avoiding vendor lock-in and minimizing ongoing licensing costs for the Government of Assam."""
+• Proprietary IP: Custom IMNCI triage decision logic, CRDT sync algorithms, and multi-modal riverine routing engine developed by the applicant.
+• Open-Source Dependencies: Built on permissive open-source frameworks (React, PostgreSQL, PostGIS, FastAPI, Leaflet, Docker), avoiding vendor lock-in and minimizing ongoing licensing costs for the Government of Assam."""
 }
 
 fields[12] = {
@@ -340,22 +342,29 @@ fields[12] = {
 SishuSuraksha is engineered for rapid, high-impact deployment under NESFIC-D-26, supported by an optimized ₹40 Lakh deep-tech innovation budget and a comprehensive risk mitigation framework.
 
 1. Indicative Development & Validation Budget (₹40 Lakh Grant Allocation):
-- Core Clinical Software & Offline CRDT Engine (₹12,50,000 / 31.25%): Engineering the offline React PWA, IndexedDB CRDT synchronization, 12-point IMNCI rule engine, and automated WHO growth tracking algorithms.
-- 108 Emergency Dispatch & Hospital Telemetry APIs (₹7,50,000 / 18.75%): Bidirectional REST/Webhook integration with GVK EMRI CAD systems and hospital SNCU live bed/warmer occupancy monitors.
-- Field Pilot, Frontline Capacity Building & Training (₹8,00,000 / 20.00%): Hands-on training workshops for 650+ ASHAs, ANMs, and BPHNs across Dhubri, Barpeta, and Majuli; development of bilingual video training modules.
-- Cloud Infrastructure, ASDC Enclave & CERT-In Audit (₹4,50,000 / 11.25%): CERT-In penetration testing, server provisioning at Assam State Data Centre, and DPDP Act compliance.
-- ABDM / FHIR Interoperability & Medical Device R&D (₹4,50,000 / 11.25%): HL7 FHIR R4 interfaces, ABHA health ID linking, and Bluetooth pulse oximeter / digital thermometer telemetry adapters.
-- Clinical Governance, Independent Audit & Admin (₹3,00,000 / 7.50%): Pediatric advisory committee oversight, clinical concordance audit, and Swiss Challenge procurement dossier preparation.
+• Core Clinical Software & Offline CRDT Engine (₹12,50,000 / 31.25%): Engineering the offline React PWA, IndexedDB CRDT synchronization, 12-point IMNCI rule engine, and automated WHO growth tracking algorithms.
+• 108 Emergency Dispatch & Hospital Telemetry APIs (₹7,50,000 / 18.75%): Bidirectional REST/Webhook integration with GVK EMRI CAD systems and hospital SNCU live bed/warmer occupancy monitors.
+• Field Pilot, Frontline Capacity Building & Training (₹8,00,000 / 20.00%): Hands-on training workshops for 650+ ASHAs, ANMs, and BPHNs across Dhubri, Barpeta, and Majuli; development of bilingual video training modules.
+• Cloud Infrastructure, ASDC Enclave & CERT-In Audit (₹4,50,000 / 11.25%): CERT-In penetration testing, server provisioning at Assam State Data Centre, and DPDP Act compliance.
+• ABDM / FHIR Interoperability & Medical Device R&D (₹4,50,000 / 11.25%): HL7 FHIR R4 interfaces, ABHA health ID linking, and Bluetooth pulse oximeter / digital thermometer telemetry adapters.
+• Clinical Governance, Independent Audit & Admin (₹3,00,000 / 7.50%): Pediatric advisory committee oversight, clinical concordance audit, and Swiss Challenge procurement dossier preparation.
 
 2. Critical Operational Risks & Actionable Mitigations:
-- Risk 1: Riverine Char Connectivity Blackouts: Mitigated by offline-first IndexedDB CRDT architecture; all clinical triages and data entries function seamlessly without internet.
-- Risk 2: Frontline ASHA Digital Literacy Barriers: Mitigated through large visual cards, audio breathing timers, color-coded triage indicators, and localized Assamese audiovisual training.
-- Risk 3: Hospital Staff Resistance to Bed Updates: Mitigated by single-tap bed/warmer status toggles and direct integration with existing SNCU admission/discharge workflows.
-- Risk 4: Delays in Ambulance Response: Mitigated by automated multi-channel dispatch alerts (SMS, automated call, and data webhook) sent simultaneously to 108 dispatchers, local 108 vehicle drivers, and riverine boat operators.
+• Risk 1: Riverine Char Connectivity Blackouts: Mitigated by offline-first IndexedDB CRDT architecture; all clinical triages and data entries function seamlessly without internet.
+• Risk 2: Frontline ASHA Digital Literacy Barriers: Mitigated through large visual cards, audio breathing timers, color-coded triage indicators, and localized Assamese audiovisual training.
+• Risk 3: Hospital Staff Resistance to Bed Updates: Mitigated by single-tap bed/warmer status toggles and direct integration with existing SNCU admission/discharge workflows.
+• Risk 4: Delays in Ambulance Response: Mitigated by automated multi-channel dispatch alerts (SMS, automated call, and data webhook) sent simultaneously to 108 dispatchers, local 108 vehicle drivers, and riverine boat operators.
 
 3. Context-Specific Pilot Validation & Commercialization Pathway:
-Following laboratory testing, the platform will be pilot-validated over 6 months across 3 high-burden aspirational districts: Dhubri (riverine chars and boat ambulances), Barpeta (high institutional delivery load), and Majuli (island geography). Success will be measured against strict clinical benchmarks (>95% diagnostic concordance, >50% transit reduction, >85% HBNC visit completion).
+Following laboratory testing, the platform will be pilot-validated over 6 months across 3 high-burden aspirational districts: Dhubri (riverine chars and boat ambulances), Barpeta (high institutional delivery load), and Majuli (island geography). Success will be measured against strict clinical benchmarks (greater than 95% diagnostic concordance, greater than 50% transit reduction, greater than 85% HBNC visit completion).
 Following successful pilot verification, the solution will transition to a full government rollout through a Swiss Challenge procurement submission under the Assam Startup Policy, sustained via annual NHM Record of Proceedings (RoP) child health operational funding at an ultra-low cost of ~₹12 per newborn tracked."""
+}
+
+supporting_material = {
+    "Proof_of_Work_PDF": "NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.pdf (PDF only · Maximum 10 MB)",
+    "Demo_Video_URL": "https://sishusuraksha-assam.pages.dev/",
+    "Product_Website_URL": "https://sishusuraksha-assam.pages.dev/",
+    "Additional_Material_PDF": "NESFIC_D26_Proposal_Ron_Hatibaruah.pdf (PDF only · Maximum 10 MB)"
 }
 
 # Verify word counts

@@ -16,7 +16,7 @@
 
 SishuSuraksha is a production-grade, offline-first clinical decision support and care-coordination platform engineered to eliminate preventable neonatal deaths across Assam's 35 districts. The system provides:
 
-1. **Structured Bedside Danger-Sign Triage:** Standardized 12-point clinical screening for frontline ASHA and ANM workers that instantly stratifies neonates into **RED** (Critical Emergency: immediate SNCU/NICU transfer <60 mins), **YELLOW** (Urgent Investigation: transfer to Block NBSU <4 hours), or **GREEN** (Stable: supervised home HBNC).
+1. **Structured Bedside Danger-Sign Triage:** Standardized 12-point clinical screening for frontline ASHA and ANM workers that instantly stratifies neonates into **RED** (Critical Emergency: immediate SNCU/NICU transfer within 60 mins), **YELLOW** (Urgent Investigation: transfer to Block NBSU within 4 hours), or **GREEN** (Stable: supervised home HBNC).
 2. **Tri-Level Capacity & Bed Allocation Radar:** Real-time occupancy tracking of neonatal beds, radiant warmers, phototherapy units, and CPAP ventilators across Newborn Stabilization Units (NBSUs), Special Newborn Care Units (SNCUs), and tertiary NICUs.
 3. **Emergency Logistics Synchronization:** Integrated 108 road ambulance and specialized Brahmaputra riverine boat-ambulance dispatch with real-time en-route vitals streaming (SpO2, axillary temperature, heart rate) and automated pre-arrival alerts that pre-heat radiant warmers prior to touchdown.
 4. **Closed-Loop Post-Discharge HBNC Continuum:** Automatic electronic linking of hospital discharge records to catchment village ASHAs, populating the 7 mandatory home visits (Days 1, 3, 7, 14, 21, 28, and 42) with automated escalation for missed visits.
@@ -101,11 +101,11 @@ The algorithmic triage engine was validated against a synthetic retrospective co
 ### Table 3.1: Clinical Triage Validation Performance (N = 4,500)
 | Clinical Danger Sign / Condition | Sensitivity | Specificity | PPV | NPV | AUC-ROC |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Severe Hypothermia (<35.5°C)** | 99.4% | 98.1% | 96.2% | 99.7% | 0.992 |
+| **Severe Hypothermia (smaller than 35.5°C)** | 99.4% | 98.1% | 96.2% | 99.7% | 0.992 |
 | **Severe Respiratory Distress (SARI ≥ 4)**| 98.2% | 96.8% | 94.1% | 99.1% | 0.985 |
 | **Suspected Neonatal Sepsis / Cord Infection**| 96.5% | 94.2% | 91.0% | 97.8% | 0.963 |
 | **Pathological Jaundice (Palms/Soles)** | 97.8% | 95.4% | 92.5% | 98.6% | 0.974 |
-| **Very Low Birth Weight (<1800g)** | 100.0% | 99.8% | 99.2% | 100.0% | 0.999 |
+| **Very Low Birth Weight (smaller than 1800g)** | 100.0% | 99.8% | 99.2% | 100.0% | 0.999 |
 | **Overall Emergency Triage (RED Alert)** | **98.2%** | **94.6%** | **93.8%** | **98.5%** | **0.978** |
 
 ### Transit & Pre-Arrival Impact Metrics
