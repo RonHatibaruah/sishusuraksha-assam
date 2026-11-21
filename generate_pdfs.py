@@ -227,7 +227,7 @@ def build_proposal_pdf(output_path):
     story = []
     story.append(safe_paragraph("NESFIC 2026 UNIFORM SOLUTION PROPOSAL (USPR)", title_style))
     story.append(safe_paragraph("SishuSuraksha (শিশু-সুৰক্ষা) — Assam Sick Newborn Care Continuum & Referral Sentinel", subtitle_style))
-    story.append(safe_paragraph("<b>Official 7-Field Application Dossier for Stream 1 (Government Department Track)</b>", subtitle_style))
+    story.append(safe_paragraph("<b>Official 12-Field Application Dossier for Stream 1 (Government Department Track)</b>", subtitle_style))
 
     meta_data = [
         [safe_paragraph("<b>Challenge ID:</b> NESFIC-D-26 (Govt Track)", meta_style), safe_paragraph("<b>Department:</b> Health & Family Welfare Department, Govt. of Assam", meta_style)],
@@ -249,41 +249,41 @@ def build_proposal_pdf(output_path):
     with open(prop_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Split by Field
-    fields = re.split(r'\n## (Field \d+:.*?)\n', content)
+    # Split by Field and Supporting Material
+    sections = re.split(r'\n## (Field \d+:.*?|03 Supporting Material.*?)\n', content)
     
-    for i in range(1, len(fields), 2):
-        field_hdr = fields[i].strip()
-        field_body = fields[i+1].strip()
+    for i in range(1, len(sections), 2):
+        sec_hdr = sections[i].strip()
+        sec_body = sections[i+1].strip()
         
         story.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#fda4af"), spaceBefore=6, spaceAfter=4))
-        story.append(safe_paragraph(field_hdr, h2_style))
+        story.append(safe_paragraph(sec_hdr, h2_style))
         
-        lines = field_body.split('\n')
+        lines = sec_body.split('\n')
         body_flowables = parse_markdown_content(lines, available_width=504)
         story.extend(body_flowables)
 
-        # Append relevant architectural diagram after key fields
-        if 'Field 1:' in field_hdr:
+        # Append relevant architectural diagrams after specific fields
+        if 'Field 1:' in sec_hdr:
             img = os.path.join(img_dir, 'diagram_1_before_after_workflow.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 6))
-        elif 'Field 2:' in field_hdr:
-            img = os.path.join(img_dir, 'diagram_3_fair_compensation_algorithm.jpg')
+        elif 'Field 3:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_3_clinical_triage_decision_tree.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 6))
-        elif 'Field 5:' in field_hdr:
-            img = os.path.join(img_dir, 'diagram_2_cadastral_reconciliation_flow.jpg')
+        elif 'Field 4:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_2_system_architecture.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 6))
-        elif 'Field 6:' in field_hdr:
-            img = os.path.join(img_dir, 'diagram_4_grievance_dispute_resolution.jpg')
+        elif 'Field 6:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_4_geospatial_referral_pipeline.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
@@ -363,19 +363,19 @@ def build_proof_of_work_pdf(output_path):
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 5))
         elif '2. Mathematical Formulations' in sec_title:
-            img = os.path.join(img_dir, 'diagram_3_fair_compensation_algorithm.jpg')
+            img = os.path.join(img_dir, 'diagram_3_clinical_triage_decision_tree.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 5))
         elif '4. Real-World Field Case Studies' in sec_title:
-            img = os.path.join(img_dir, 'diagram_4_grievance_dispute_resolution.jpg')
+            img = os.path.join(img_dir, 'diagram_4_geospatial_referral_pipeline.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 5))
         elif '5. System Architecture' in sec_title:
-            img = os.path.join(img_dir, 'diagram_2_cadastral_reconciliation_flow.jpg')
+            img = os.path.join(img_dir, 'diagram_2_system_architecture.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))

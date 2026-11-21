@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate clean, copy-paste-ready, textarea-compliant plain text files for NESFIC 2026:
-1. NESFIC_D26_Proposal_Ron_Hatibaruah.txt (Field-by-field copy-paste textarea blocks)
+1. NESFIC_D26_Proposal_Ron_Hatibaruah.txt (All 12 portal fields + supporting materials)
 2. NESFIC_D26_Proof_of_Work_Ron_Hatibaruah.txt (Full and modular copy-paste textarea blocks)
 """
 
@@ -65,7 +65,7 @@ def generate_proposal_text():
         
     # Extract header info
     header = "=" * 80 + "\n"
-    header += "NESFIC 2026 - STREAM 1 (GOVERNMENT TRACK) - UNIFORM SOLUTION PROPOSAL (USPR)\n"
+    header += "NESFIC 2026 - STREAM 1 (GOVERNMENT TRACK) - OFFICIAL 12-FIELD PROPOSAL DOSSIER\n"
     header += "Problem Statement ID: NESFIC-D-26: Timely Identification, Referral & Follow-up of Sick Newborns\n"
     header += "Sponsoring Department: Department of Health and Family Welfare ● Government of Assam\n"
     header += "Technical Synergy: National Health Mission (NHM) Assam\n"
@@ -76,7 +76,7 @@ def generate_proposal_text():
     header += "=" * 80 + "\n\n"
     
     # Split into fields
-    field_pattern = r'## (Field \d+:.*?)(?=\n## Field |\Z)'
+    field_pattern = r'## (Field \d+:.*?)(?=\n## Field |\n## 03 |\Z)'
     fields = re.findall(field_pattern, raw, flags=re.DOTALL)
     
     field_texts = []
@@ -90,20 +90,31 @@ def generate_proposal_text():
         
         # Word limit info
         limit_match = re.search(r'Limit:\s*(\d+)\s*words', field_body)
-        limit_str = f" [Limit: {limit_match.group(1)} words]" if limit_match else ""
+        limit_str = f" [Limit: {limit_match.group(1)} words]" if limit_match else " [Limit: 500 words]"
         
-        cleaned_body = clean_text_for_textarea(field_body)
+        # Remove prompt line if present in body for clean submission text
+        body_for_count = re.sub(r'^\*\*Portal Prompt:\*\*.*?\n\n', '', field_body, flags=re.DOTALL)
+        body_for_count = re.sub(r'^\*\(Word Count:.*?\*\n\n', '', body_for_count, flags=re.DOTALL)
+        
+        cleaned_body = clean_text_for_textarea(body_for_count)
         word_count = len(re.findall(r'\b\w+\b', cleaned_body))
         
         block = f"{'='*80}\n"
-        block += f"COPY-PASTE BLOCK: FIELD {field_num}{limit_str}\n"
+        block += f"COPY-PASTE BLOCK: FIELD {field_num}{limit_str} — {field_header}\n"
         block += f"Actual Word Count: {word_count} words (STRICTLY <= 500 WORDS)\n"
         block += f"{'='*80}\n\n"
         block += cleaned_body + "\n\n"
         
         field_texts.append(block)
         
-    full_output = header + "".join(field_texts)
+    # Append Supporting Materials section
+    supp_match = re.search(r'## 03 Supporting Material Submission Details.*', raw, flags=re.DOTALL)
+    supp_text = ""
+    if supp_match:
+        supp_text = f"\n{'='*80}\n03 SUPPORTING MATERIAL SUBMISSION FIELDS\n{'='*80}\n\n"
+        supp_text += clean_text_for_textarea(supp_match.group(0)) + "\n"
+
+    full_output = header + "".join(field_texts) + supp_text
     
     with open(out_file, 'w', encoding='utf-8') as f:
         f.write(full_output)
