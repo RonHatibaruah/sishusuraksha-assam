@@ -443,10 +443,476 @@ def create_high_impact_infographic_4():
 
     save_infographic(fig, "diagram_4_grievance_dispute_resolution", "diagram_4_geospatial_referral_pipeline")
 
+# ==============================================================================
+# INFOGRAPHIC 5: TRI-LEVEL FACILITY CAPACITY RADAR & PRE-ARRIVAL RESUSCITATION TELEMETRY
+# ==============================================================================
+def create_high_impact_infographic_5():
+    fig, ax = plt.subplots(figsize=(16, 9), dpi=200)
+    ax.set_facecolor(BG_WHITE)
+    fig.patch.set_facecolor(BG_WHITE)
+    ax.axis('off')
+    add_blueprint_grid(ax)
+
+    add_executive_header(ax, "TRI-LEVEL FACILITY CAPACITY RADAR & PRE-ARRIVAL RESUSCITATION TELEMETRY",
+                         "Real-Time ICU Command Center, Radiant Warmer Allocation & Golden-Hour Pre-Alerting (Health & Family Welfare Dept ● Govt of Assam)",
+                         "NESFIC-D-26 CAPACITY COMMAND")
+
+    # 3 MAIN PANELS
+    # Panel 1: Tri-Level Hospital Hierarchy
+    p1 = FancyBboxPatch((0.02, 0.23), 0.29, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f8fafc', edgecolor='#cbd5e1', linewidth=1.4, zorder=1)
+    ax.add_patch(p1)
+    # Header strip
+    s1 = FancyBboxPatch((0.02, 0.81), 0.29, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=NAVY_HEADER, edgecolor='none', zorder=2)
+    ax.add_patch(s1)
+    ax.text(0.165, 0.835, "TRI-LEVEL FACILITY HIERARCHY", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    tiers = [
+        ("APEX TERTIARY NICUs (LEVEL III)", "GMCH Guwahati • FAAMCH Barpeta • AMCH Dibrugarh\nCapacity: 34 Intensive Care Beds • 91% Occupancy\nSpecialties: Sub-specialty Neonatal Surgery, HFOV", ACCENT_ROSE, 0.63),
+        ("DISTRICT HOSPITAL SNCUs (LEVEL II)", "Dhubri Civil • Goalpara • Tinsukia • Silchar SMCH\nCapacity: 24 Special Care Beds • 84% Occupancy\nSpecialties: Radiant Warmers, Phototherapy, CPAP", ACCENT_BLUE, 0.44),
+        ("BLOCK STABILIZATION NBSUs (LEVEL I)", "Model CHCs & First Referral Units (FRUs)\nCapacity: 100+ Warmers Statewide • 62% Occupancy\nSpecialties: Initial Stabilization, KMC, Glucose IV", ACCENT_EMERALD, 0.25)
+    ]
+    for ttitle, tdesc, tcol, ty in tiers:
+        tbox = FancyBboxPatch((0.035, ty), 0.26, 0.17, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor='#e2e8f0', linewidth=1, zorder=2)
+        ax.add_patch(tbox)
+        tstrip = FancyBboxPatch((0.035, ty + 0.14), 0.26, 0.03, boxstyle="round,pad=0.004,rounding_size=0.006",
+                                facecolor=tcol, edgecolor='none', zorder=3)
+        ax.add_patch(tstrip)
+        ax.text(0.165, ty + 0.155, ttitle, ha='center', va='center', fontsize=7.6, fontweight='bold', color='#ffffff', zorder=4)
+        ax.text(0.045, ty + 0.03, tdesc, fontsize=7.2, color='#334155', linespacing=1.35, zorder=3)
+
+    # Panel 2: Live Equipment Capacity & Availability Gauges
+    p2 = FancyBboxPatch((0.33, 0.23), 0.33, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f0fdf4', edgecolor='#bbf7d0', linewidth=1.4, zorder=1)
+    ax.add_patch(p2)
+    s2 = FancyBboxPatch((0.33, 0.81), 0.33, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_TEAL, edgecolor='none', zorder=2)
+    ax.add_patch(s2)
+    ax.text(0.495, 0.835, "LIVE EQUIPMENT INVENTORY & CAPACITY GAUGES", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    gauges = [
+        ("RADIANT WARMERS INVENTORY", "Total: 48 | Occupied: 39 | Available: 9 Available", 0.72, ACCENT_AMBER, 0.81),
+        ("DOUBLE-SURFACE PHOTOTHERAPY", "Total: 28 | In-Use: 22 | Available: 6 Available", 0.58, ACCENT_CYAN, 0.78),
+        ("NEONATAL BUBBLE CPAP VENTILATORS", "Total: 16 | Active: 12 | Standby: 4 Available", 0.44, ACCENT_PURPLE, 0.75),
+        ("ON-DUTY SPECIALIST NEONATAL STAFF", "4 Pediatricians on Duty • 12 Specialized SNCU Nurses on Shift", 0.30, ACCENT_EMERALD, 1.0)
+    ]
+    for gtitle, gstats, gy, gcol, gpct in gauges:
+        gbox = FancyBboxPatch((0.345, gy), 0.30, 0.12, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+        ax.add_patch(gbox)
+        ax.text(0.355, gy + 0.09, gtitle, fontsize=7.8, fontweight='bold', color='#0f172a', zorder=3)
+        ax.text(0.355, gy + 0.065, gstats, fontsize=7.0, color='#475569', zorder=3)
+        # Bar background
+        bbar_bg = FancyBboxPatch((0.355, gy + 0.02), 0.28, 0.03, boxstyle="round,pad=0.002,rounding_size=0.004",
+                                facecolor='#e2e8f0', edgecolor='none', zorder=3)
+        ax.add_patch(bbar_bg)
+        # Bar fill
+        bbar_fill = FancyBboxPatch((0.355, gy + 0.02), 0.28 * gpct, 0.03, boxstyle="round,pad=0.002,rounding_size=0.004",
+                                  facecolor=gcol, edgecolor='none', zorder=4)
+        ax.add_patch(bbar_fill)
+
+    # Panel 3: Live Pager Alert & En-Route Telemetry
+    p3 = FancyBboxPatch((0.68, 0.23), 0.30, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#fff1f2', edgecolor='#fecdd3', linewidth=1.4, zorder=1)
+    ax.add_patch(p3)
+    s3 = FancyBboxPatch((0.68, 0.81), 0.30, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_ROSE, edgecolor='none', zorder=2)
+    ax.add_patch(s3)
+    ax.text(0.83, 0.835, "INCOMING AMBULANCE RADAR & PRE-ALERT", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    # Live Callout Box
+    alert_box = FancyBboxPatch((0.695, 0.60), 0.27, 0.19, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor=ACCENT_ROSE, linewidth=1.5, zorder=2)
+    ax.add_patch(alert_box)
+    ax.text(0.83, 0.75, "🚨 INCOMING CRITICAL TRANSFER", ha='center', fontsize=8.2, fontweight='bold', color=ACCENT_ROSE, zorder=3)
+    ax.text(0.71, 0.715, "Vehicle: 108 Boat Ambulance #AS-01-WB-108", fontsize=7.2, fontweight='bold', color='#0f172a', zorder=3)
+    ax.text(0.71, 0.685, "Origin: Dhubri Char Sandbar Island", fontsize=7.0, color='#475569', zorder=3)
+    ax.text(0.71, 0.655, "Patient: Neonate of R. Begum (Day 2, 1600g)", fontsize=7.0, color='#475569', zorder=3)
+    ax.text(0.71, 0.625, "Clinical Code: RED (Severe Tachypnea & Hypothermia)", fontsize=7.0, fontweight='bold', color='#dc2626', zorder=3)
+
+    # Vitals Telemetry Card
+    vitals_box = FancyBboxPatch((0.695, 0.39), 0.27, 0.19, boxstyle="round,pad=0.008,rounding_size=0.01",
+                               facecolor='#0f172a', edgecolor='#334155', linewidth=1.2, zorder=2)
+    ax.add_patch(vitals_box)
+    ax.text(0.83, 0.545, "EN-ROUTE LIVE TELEMETRY", ha='center', fontsize=7.8, fontweight='bold', color='#38bdf8', zorder=3)
+    ax.text(0.71, 0.505, "• SpO2: 91% (Under Portable Oxygen)", fontsize=7.4, color='#34d399', zorder=3)
+    ax.text(0.71, 0.470, "• Heart Rate: 164 bpm (Tachycardia)", fontsize=7.4, color='#f87171', zorder=3)
+    ax.text(0.71, 0.435, "• Axillary Temp: 35.2°C (Hypothermic)", fontsize=7.4, color='#fbbf24', zorder=3)
+    ax.text(0.71, 0.405, "• Dynamic GPS ETA: 14 Minutes Countdown", fontsize=7.4, fontweight='bold', color='#ffffff', zorder=3)
+
+    # Automated Command
+    cmd_box = FancyBboxPatch((0.695, 0.25), 0.27, 0.12, boxstyle="round,pad=0.008,rounding_size=0.01",
+                             facecolor='#f0fdf4', edgecolor=ACCENT_EMERALD, linewidth=1.2, zorder=2)
+    ax.add_patch(cmd_box)
+    ax.text(0.83, 0.33, "AUTOMATED FACILITY ACTION", ha='center', fontsize=7.8, fontweight='bold', color=ACCENT_EMERALD, zorder=3)
+    ax.text(0.83, 0.29, "✓ Radiant Warmer #4 Pre-Heated to 36.5°C\n✓ Emergency Resuscitation Team Mobilized", ha='center', fontsize=7.0, color='#166534', zorder=3)
+
+    # Bottom Metric Banner
+    bot = FancyBboxPatch((0.015, 0.02), 0.97, 0.18, boxstyle="round,pad=0.01,rounding_size=0.012",
+                         facecolor=NAVY_HEADER, edgecolor='#1e293b', linewidth=1.5, zorder=2)
+    ax.add_patch(bot)
+    ax.text(0.5, 0.165, "SISHUSURAKSHA HOSPITAL RADAR: ELIMINATING RESUSCITATION BOTTLENECKS", ha='center', fontsize=9.5, fontweight='bold', color='#38bdf8', zorder=3)
+
+    bm = [
+        ("0 COLD ARRIVALS", "WARMERS PRE-HEATED", "100% of admitted infants meet warm beds", '#38bdf8'),
+        ("< 4 MINUTES", "TOUCHDOWN RESUSCITATION", "Golden-hour admission streamlined", '#34d399'),
+        ("100% VISIBILITY", "EQUIPMENT AVAILABILITY", "Real-time state tracking prevents blind diversions", '#fbbf24'),
+        ("35 DISTRICTS", "SNCU & NBSU NETWORK", "Universal tri-level facility synchronization", '#f43f5e')
+    ]
+    bx = 0.04
+    for val, lbl, sub, col in bm:
+        ax.text(bx + 0.10, 0.115, val, ha='center', va='center', fontsize=14.0, fontweight='bold', color=col, zorder=3)
+        ax.text(bx + 0.10, 0.075, lbl, ha='center', va='center', fontsize=7.8, fontweight='bold', color='#ffffff', zorder=3)
+        ax.text(bx + 0.10, 0.045, sub, ha='center', va='center', fontsize=6.8, color='#94a3b8', zorder=3)
+        bx += 0.24
+
+    save_infographic(fig, "diagram_5_facility_bed_radar")
+
+# ==============================================================================
+# INFOGRAPHIC 6: CLOSED-LOOP HBNC CONTINUITY & AUTOMATED PEDIATRIC GROWTH SURVEILLANCE
+# ==============================================================================
+def create_high_impact_infographic_6():
+    fig, ax = plt.subplots(figsize=(16, 9), dpi=200)
+    ax.set_facecolor(BG_WHITE)
+    fig.patch.set_facecolor(BG_WHITE)
+    ax.axis('off')
+    add_blueprint_grid(ax)
+
+    add_executive_header(ax, "CLOSED-LOOP HBNC CONTINUITY & AUTOMATED PEDIATRIC GROWTH SURVEILLANCE",
+                         "Facility-to-Village Handshake, 7 Mandatory Home Visits & Algorithmic Failure-to-Thrive Detection",
+                         "NESFIC-D-26 HBNC ENGINE")
+
+    # 3 PANELS
+    # Panel 1: Electronic Discharge Handshake
+    p1 = FancyBboxPatch((0.02, 0.23), 0.28, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f5f3ff', edgecolor='#ddd6fe', linewidth=1.4, zorder=1)
+    ax.add_patch(p1)
+    s1 = FancyBboxPatch((0.02, 0.81), 0.28, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_PURPLE, edgecolor='none', zorder=2)
+    ax.add_patch(s1)
+    ax.text(0.16, 0.835, "FACILITY DISCHARGE HANDSHAKE", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    steps = [
+        ("1. Hospital Pediatrician Clearance", "SNCU clinician reviews recovery vitals, feeding adequacy,\nand generates electronic discharge summary.", 0.64),
+        ("2. Automated Push to Village ASHA", "Patient profile with ABHA ID instantly pushed to the\ncatchment village ASHA offline smartphone worklist.", 0.46),
+        ("3. Auto-Roster Population", "7 mandatory home visit dates dynamically computed\nand synchronized into ASHA task calendar.", 0.28)
+    ]
+    for stitle, sdesc, sy in steps:
+        sbox = FancyBboxPatch((0.035, sy), 0.25, 0.15, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+        ax.add_patch(sbox)
+        ax.text(0.045, sy + 0.115, stitle, fontsize=7.8, fontweight='bold', color=ACCENT_PURPLE, zorder=3)
+        ax.text(0.045, sy + 0.03, sdesc, fontsize=7.1, color='#334155', linespacing=1.35, zorder=3)
+
+    # Panel 2: The 7 Mandated Home-Based Newborn Care Visits
+    p2 = FancyBboxPatch((0.32, 0.23), 0.38, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f0fdf4', edgecolor='#bbf7d0', linewidth=1.4, zorder=1)
+    ax.add_patch(p2)
+    s2 = FancyBboxPatch((0.32, 0.81), 0.38, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_EMERALD, edgecolor='none', zorder=2)
+    ax.add_patch(s2)
+    ax.text(0.51, 0.835, "7 MANDATORY HOME-BASED NEWBORN CARE (HBNC) VISITS", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    visits = [
+        ("DAY 1", "Thermal Protection & Cord Hygiene", "Skin-to-skin KMC audit, clean cord stump check, birth registration verification", 0.72),
+        ("DAY 3", "Jaundice & Breastfeeding Check", "Palms/soles jaundice inspection, exclusive breastfeeding latch assessment", 0.64),
+        ("DAY 7", "Growth & Infection Screening", "Weight assessment, umbilical healing check, screening for lethargy/fever", 0.56),
+        ("DAY 14", "Weight Velocity Evaluation", "Target weight gain (+25 to 30g/day), temperature stability audit", 0.48),
+        ("DAY 21", "Continued Thermal & Feeding Care", "KMC continuation for low-birth-weight infants, maternal nutrition review", 0.40),
+        ("DAY 28", "Neonatal Milestone Audit", "Full neonatal period completion screening, routine immunization briefing", 0.32),
+        ("DAY 42", "Comprehensive Health Handover", "Postpartum maternal check, infant growth certification, Anganwadi transition", 0.24)
+    ]
+    for vday, vtitle, vdesc, vy in visits:
+        vbox = FancyBboxPatch((0.335, vy), 0.35, 0.068, boxstyle="round,pad=0.005,rounding_size=0.006",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=0.8, zorder=2)
+        ax.add_patch(vbox)
+        vpill = FancyBboxPatch((0.342, vy + 0.012), 0.055, 0.044, boxstyle="round,pad=0.003,rounding_size=0.004",
+                               facecolor=ACCENT_EMERALD, edgecolor='none', zorder=3)
+        ax.add_patch(vpill)
+        ax.text(0.369, vy + 0.034, vday, ha='center', va='center', fontsize=7.2, fontweight='bold', color='#ffffff', zorder=4)
+        ax.text(0.405, vy + 0.042, vtitle, fontsize=7.4, fontweight='bold', color='#0f172a', zorder=3)
+        ax.text(0.405, vy + 0.015, vdesc, fontsize=6.5, color='#475569', zorder=3)
+
+    # Panel 3: WHO Growth Velocity & BPHN Escalation
+    p3 = FancyBboxPatch((0.72, 0.23), 0.26, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#fff7ed', edgecolor='#fed7aa', linewidth=1.4, zorder=1)
+    ax.add_patch(p3)
+    s3 = FancyBboxPatch((0.72, 0.81), 0.26, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_AMBER, edgecolor='none', zorder=2)
+    ax.add_patch(s3)
+    ax.text(0.85, 0.835, "GROWTH VELOCITY & ESCALATION", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    # WHO Trajectory Card
+    wbox = FancyBboxPatch((0.735, 0.53), 0.23, 0.26, boxstyle="round,pad=0.008,rounding_size=0.01",
+                          facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+    ax.add_patch(wbox)
+    ax.text(0.85, 0.745, "WHO GROWTH VELOCITY ENGINE", ha='center', fontsize=7.6, fontweight='bold', color='#0f172a', zorder=3)
+    ax.text(0.745, 0.705, "• Daily Weight Gain Standard: 25-30g/day", fontsize=7.0, color='#334155', zorder=3)
+    ax.text(0.745, 0.665, "• Algorithmic Failure-to-Thrive Detection:", fontsize=7.0, color='#334155', zorder=3)
+    ax.text(0.745, 0.630, "   Flags weight loss > 10% from baseline", fontsize=6.8, fontweight='bold', color='#dc2626', zorder=3)
+    ax.text(0.745, 0.595, "   Automated re-triage to Block NBSU", fontsize=6.8, color='#0284c7', zorder=3)
+    ax.text(0.745, 0.555, "• Micro-Scale Digital Baby Scale Integration", fontsize=6.8, color='#16a34a', zorder=3)
+
+    # BPHN Escalation Daemon
+    ebox = FancyBboxPatch((0.735, 0.25), 0.23, 0.26, boxstyle="round,pad=0.008,rounding_size=0.01",
+                          facecolor='#ffffff', edgecolor='#fca5a5', linewidth=1.2, zorder=2)
+    ax.add_patch(ebox)
+    ax.text(0.85, 0.465, "BPHN SUPERVISORY ESCALATION", ha='center', fontsize=7.6, fontweight='bold', color='#dc2626', zorder=3)
+    ax.text(0.745, 0.425, "• Missed Visit Daemon (>24h overdue):", fontsize=7.0, color='#334155', zorder=3)
+    ax.text(0.745, 0.390, "   Automated SMS to Block Nurse", fontsize=6.8, fontweight='bold', color='#b91c1c', zorder=3)
+    ax.text(0.745, 0.355, "• Secondary Home Visit Verification", fontsize=6.8, color='#475569', zorder=3)
+    ax.text(0.745, 0.320, "• Zero Lost-to-Follow-up Target", fontsize=6.8, fontweight='bold', color='#15803d', zorder=3)
+    ax.text(0.745, 0.280, "• Verified Maternal Acknowledgment", fontsize=6.8, color='#475569', zorder=3)
+
+    # Bottom Metric Banner
+    bot = FancyBboxPatch((0.015, 0.02), 0.97, 0.18, boxstyle="round,pad=0.01,rounding_size=0.012",
+                         facecolor=NAVY_HEADER, edgecolor='#1e293b', linewidth=1.5, zorder=2)
+    ax.add_patch(bot)
+    ax.text(0.5, 0.165, "HBNC CONTINUITY PERFORMANCE TARGETS ACROSS ASSAM", ha='center', fontsize=9.5, fontweight='bold', color='#38bdf8', zorder=3)
+
+    bm = [
+        ("46.2% -> 83.8%", "7-VISIT ADHERENCE", "Closing the post-discharge recovery gap", '#38bdf8'),
+        ("100%", "DISCHARGE RECONCILIATION", "Electronic handshake replaces paper slip loss", '#34d399'),
+        ("< 24 HOURS", "ESCALATION DISPATCH", "Rapid nurse intervention for missed checkups", '#fbbf24'),
+        ("32,000+ ASHAS", "COMMUNITY SENTINEL GRID", "Statewide grassroots coverage in Assam", '#f43f5e')
+    ]
+    bx = 0.04
+    for val, lbl, sub, col in bm:
+        ax.text(bx + 0.10, 0.115, val, ha='center', va='center', fontsize=14.0, fontweight='bold', color=col, zorder=3)
+        ax.text(bx + 0.10, 0.075, lbl, ha='center', va='center', fontsize=7.8, fontweight='bold', color='#ffffff', zorder=3)
+        ax.text(bx + 0.10, 0.045, sub, ha='center', va='center', fontsize=6.8, color='#94a3b8', zorder=3)
+        bx += 0.24
+
+    save_infographic(fig, "diagram_6_hbnc_continuity_growth")
+
+# ==============================================================================
+# INFOGRAPHIC 7: VERNACULAR CAREGIVER ADVISORY & BEHAVIORAL HEALTH ENGAGEMENT ENGINE
+# ==============================================================================
+def create_high_impact_infographic_7():
+    fig, ax = plt.subplots(figsize=(16, 9), dpi=200)
+    ax.set_facecolor(BG_WHITE)
+    fig.patch.set_facecolor(BG_WHITE)
+    ax.axis('off')
+    add_blueprint_grid(ax)
+
+    add_executive_header(ax, "VERNACULAR CAREGIVER ADVISORY & BEHAVIORAL HEALTH ENGAGEMENT ENGINE",
+                         "Bilingual Assamese & English Multi-Channel Maternal Guidance (WhatsApp Cloud API & C-DAC SMS)",
+                         "NESFIC-D-26 MATERNAL ADVISORY")
+
+    # 3 PANELS
+    # Panel 1: Smartphone UI Mockup (Assamese & English WhatsApp Flow)
+    p1 = FancyBboxPatch((0.02, 0.23), 0.30, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f0fdf4', edgecolor='#bbf7d0', linewidth=1.4, zorder=1)
+    ax.add_patch(p1)
+    s1 = FancyBboxPatch((0.02, 0.81), 0.30, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor='#075e54', edgecolor='none', zorder=2)
+    ax.add_patch(s1)
+    ax.text(0.17, 0.835, "WHATSAPP CHAT FLOW (ASSAMESE & ENG)", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    # Chat Bubbles
+    cb1 = FancyBboxPatch((0.035, 0.69), 0.25, 0.10, boxstyle="round,pad=0.006,rounding_size=0.008",
+                         facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=0.8, zorder=2)
+    ax.add_patch(cb1)
+    ax.text(0.045, 0.76, "SishuSuraksha Assam [Bilingual Maternal Pager]", fontsize=7.2, fontweight='bold', color='#075e54', zorder=3)
+    ax.text(0.045, 0.725, "Namaskar Rahima Begum! Day 3 Newborn Health Check:\nIs your baby feeding actively and feeling warm?", fontsize=6.8, color='#334155', zorder=3)
+
+    cb2 = FancyBboxPatch((0.055, 0.54), 0.23, 0.13, boxstyle="round,pad=0.006,rounding_size=0.008",
+                         facecolor='#dcf8c6', edgecolor='#bbf7d0', linewidth=0.8, zorder=2)
+    ax.add_patch(cb2)
+    ax.text(0.065, 0.635, "Danger-Signs Rapid Self-Audit [Bipod Lakkhan]:", fontsize=7.0, fontweight='bold', color='#0f172a', zorder=3)
+    ax.text(0.065, 0.605, "✓ Body cold to touch (Axillary Temp < 36°C)?", fontsize=6.6, color='#334155', zorder=3)
+    ax.text(0.065, 0.580, "✓ Severe chest indrawing or grunting breathing?", fontsize=6.6, color='#334155', zorder=3)
+    ax.text(0.065, 0.555, "✓ Yellow palms or soles (Pathological Jaundice)?", fontsize=6.6, color='#334155', zorder=3)
+
+    # Interactive Response Buttons
+    rb1 = FancyBboxPatch((0.04, 0.45), 0.12, 0.065, boxstyle="round,pad=0.004,rounding_size=0.006",
+                         facecolor='#ffffff', edgecolor='#25d366', linewidth=1.2, zorder=2)
+    ax.add_patch(rb1)
+    ax.text(0.10, 0.482, "[!] Symptoms Seen\n(Alert ASHA / 108)", ha='center', va='center', fontsize=6.4, fontweight='bold', color='#dc2626', zorder=3)
+
+    rb2 = FancyBboxPatch((0.17, 0.45), 0.12, 0.065, boxstyle="round,pad=0.004,rounding_size=0.006",
+                         facecolor='#ffffff', edgecolor='#25d366', linewidth=1.2, zorder=2)
+    ax.add_patch(rb2)
+    ax.text(0.23, 0.482, "[OK] Baby Feeding Well\n(Log Routine Visit)", ha='center', va='center', fontsize=6.4, fontweight='bold', color='#166534', zorder=3)
+
+    # Direct 108 Hotline Call
+    hcall = FancyBboxPatch((0.035, 0.25), 0.27, 0.17, boxstyle="round,pad=0.008,rounding_size=0.01",
+                           facecolor='#fee2e2', edgecolor='#fca5a5', linewidth=1.2, zorder=2)
+    ax.add_patch(hcall)
+    ax.text(0.17, 0.385, "EMERGENCY 108 ESCALATION TRIGGER", ha='center', fontsize=7.4, fontweight='bold', color='#b91c1c', zorder=3)
+    ax.text(0.17, 0.345, "One-tap trigger alerts 108 road/boat ambulance\nand catchment village ASHA simultaneously", ha='center', fontsize=6.8, color='#7f1d1d', zorder=3)
+    ax.text(0.17, 0.295, "Toll-Free Helpline: 108 / 104 Integration", ha='center', fontsize=7.6, fontweight='bold', color='#dc2626', zorder=3)
+
+    # Panel 2: Telecommunications & Dispatch Architecture
+    p2 = FancyBboxPatch((0.34, 0.23), 0.36, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#f8fafc', edgecolor='#cbd5e1', linewidth=1.4, zorder=1)
+    ax.add_patch(p2)
+    s2 = FancyBboxPatch((0.34, 0.81), 0.36, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=NAVY_HEADER, edgecolor='none', zorder=2)
+    ax.add_patch(s2)
+    ax.text(0.52, 0.835, "MULTI-CHANNEL DISPATCH GATEWAYS", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    gateways = [
+        ("META WHATSAPP CLOUD API", "Automated bilingual conversational journeys, video latch demos,\naudio notes for low-literacy mothers, interactive triage buttons.", ACCENT_EMERALD, 0.64),
+        ("C-DAC NATIONAL MOBILE GOVERNANCE SMS", "High-priority DLT-registered transactional SMS gateway\nReliable delivery to basic 2G feature phones across remote tea gardens.", ACCENT_BLUE, 0.46),
+        ("INTERACTIVE VOICE RESPONSE (IVRS)", "Pre-recorded audio calls in Assamese, Bodo, and Bengali dialects\nEnsures 100% reach for non-smartphone households.", ACCENT_AMBER, 0.28)
+    ]
+    for gtitle, gdesc, gcol, gy in gateways:
+        gbox = FancyBboxPatch((0.355, gy), 0.33, 0.15, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+        ax.add_patch(gbox)
+        gstrip = FancyBboxPatch((0.355, gy + 0.12), 0.33, 0.03, boxstyle="round,pad=0.003,rounding_size=0.004",
+                                facecolor=gcol, edgecolor='none', zorder=3)
+        ax.add_patch(gstrip)
+        ax.text(0.52, gy + 0.135, gtitle, ha='center', va='center', fontsize=7.6, fontweight='bold', color='#ffffff', zorder=4)
+        ax.text(0.365, gy + 0.03, gdesc, fontsize=7.0, color='#334155', linespacing=1.35, zorder=3)
+
+    # Panel 3: Engagement Analytics & Empowerment Metrics
+    p3 = FancyBboxPatch((0.72, 0.23), 0.26, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                        facecolor='#eff6ff', edgecolor='#bfdbfe', linewidth=1.4, zorder=1)
+    ax.add_patch(p3)
+    s3 = FancyBboxPatch((0.72, 0.81), 0.26, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_CYAN, edgecolor='none', zorder=2)
+    ax.add_patch(s3)
+    ax.text(0.85, 0.835, "ENGAGEMENT ANALYTICS", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    metrics_list = [
+        ("94.6%", "RURAL SMS/WHATSAPP DELIVERY", "Direct reach into tea garden & char families", '#0284c7', 0.66),
+        ("82.1%", "FAMILY ENGAGEMENT RATE", "Interactive response rate on danger-sign checkups", '#059669', 0.49),
+        ("100%", "VERNACULAR LOCALIZATION", "Assamese, Bodo, Bengali, and English scripts", '#7c3aed', 0.32)
+    ]
+    for mval, mlbl, msub, mcol, my in metrics_list:
+        mbox = FancyBboxPatch((0.735, my), 0.23, 0.14, boxstyle="round,pad=0.008,rounding_size=0.01",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+        ax.add_patch(mbox)
+        ax.text(0.85, my + 0.095, mval, ha='center', fontsize=13.0, fontweight='bold', color=mcol, zorder=3)
+        ax.text(0.85, my + 0.060, mlbl, ha='center', fontsize=7.4, fontweight='bold', color='#0f172a', zorder=3)
+        ax.text(0.85, my + 0.025, msub, ha='center', fontsize=6.6, color='#64748b', zorder=3)
+
+    # Bottom Metric Banner
+    bot = FancyBboxPatch((0.015, 0.02), 0.97, 0.18, boxstyle="round,pad=0.01,rounding_size=0.012",
+                         facecolor=NAVY_HEADER, edgecolor='#1e293b', linewidth=1.5, zorder=2)
+    ax.add_patch(bot)
+    ax.text(0.5, 0.165, "CAREGIVER EMPOWERMENT: ACCELERATING COMMUNITY ACTION & FIRST DELAY RESOLUTION", ha='center', fontsize=9.5, fontweight='bold', color='#38bdf8', zorder=3)
+
+    bm = [
+        ("ZERO BARRIER", "VERNACULAR ACCESS", "Audio notes & Assamese UI bridge digital divide", '#38bdf8'),
+        ("< 2 HOURS", "SYMPTOM RECOGNITION", "Danger-sign window cut down by over 80%", '#34d399'),
+        ("1-TAP 108", "EMERGENCY ESCALATION", "Direct integration with road/boat dispatchers", '#fbbf24'),
+        ("DPDP 2023", "DATA PRIVACY COMPLIANT", "Strict parental consent & tokenized records", '#f43f5e')
+    ]
+    bx = 0.04
+    for val, lbl, sub, col in bm:
+        ax.text(bx + 0.10, 0.115, val, ha='center', va='center', fontsize=14.0, fontweight='bold', color=col, zorder=3)
+        ax.text(bx + 0.10, 0.075, lbl, ha='center', va='center', fontsize=7.8, fontweight='bold', color='#ffffff', zorder=3)
+        ax.text(bx + 0.10, 0.045, sub, ha='center', va='center', fontsize=6.8, color='#94a3b8', zorder=3)
+        bx += 0.24
+
+    save_infographic(fig, "diagram_7_vernacular_caregiver_advisory")
+
+# ==============================================================================
+# INFOGRAPHIC 8: 12-MONTH STATEWIDE ROLLOUT ROADMAP & SWISS CHALLENGE PROCUREMENT PATHWAY
+# ==============================================================================
+def create_high_impact_infographic_8():
+    fig, ax = plt.subplots(figsize=(16, 9), dpi=200)
+    ax.set_facecolor(BG_WHITE)
+    fig.patch.set_facecolor(BG_WHITE)
+    ax.axis('off')
+    add_blueprint_grid(ax)
+
+    add_executive_header(ax, "12-MONTH STATEWIDE ROLLOUT ROADMAP & SWISS CHALLENGE PROCUREMENT PATHWAY",
+                         "Phased Deployment, Institutional Validation Gates, Grant Allocation & Sustainable Public Health Economics",
+                         "NESFIC-D-26 ROADMAP & PROCUREMENT")
+
+    # TOP SECTION: 4-Quarter Milestones Timeline (0.64 width)
+    tbox = FancyBboxPatch((0.02, 0.23), 0.64, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                          facecolor='#f8fafc', edgecolor='#cbd5e1', linewidth=1.4, zorder=1)
+    ax.add_patch(tbox)
+    st = FancyBboxPatch((0.02, 0.81), 0.64, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=NAVY_HEADER, edgecolor='none', zorder=2)
+    ax.add_patch(st)
+    ax.text(0.34, 0.835, "12-MONTH PHASED IMPLEMENTATION TIMELINE & DELIVERABLE GATES", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    q_phases = [
+        ("Q1 (M1-M3): APEX PILOT & CLINICAL CO-DESIGN", 
+         "• Technical workshops with NHM Child Health & GMCH/FAAMCH pediatric faculty\n• Calibrate 12-point IMNCI triage thresholds & TOPS stabilization workflows\n• Pilot deployment across GMCH Guwahati, FAAMCH Barpeta, 8 NBSUs, 120 ASHAs\n• Bidirectional API integration with 108 EMRI dispatch & hospital bed rosters",
+         ACCENT_BLUE, 0.65),
+        ("Q2 (M4-M6): ASPIRATIONAL DISTRICT FIELD SATURATION", 
+         "• Field saturation across 3 high-burden districts: Dhubri, Barpeta, and Majuli Island\n• Brahmaputra riverine boat ambulance GPS telemetry & offline CRDT stress testing\n• Frontline capacity building: 650 ASHAs, 180 ANMs, and 45 Medical Officers trained\n• Mid-term clinical audit targeting >95% concordance with senior pediatricians",
+         ACCENT_PURPLE, 0.49),
+        ("Q3 (M7-M9): 15-DISTRICT REGIONAL EXPANSION", 
+         "• Scale platform to 15 high-NMR districts (Upper Assam & Barak Valley)\n• Integrate 24 District Hospital SNCUs, monitoring >15,000 newborn discharges\n• Full activation of closed-loop HBNC tracking and BPHN supervisory escalation\n• Deployment of bilingual Assamese/English WhatsApp & C-DAC SMS advisory hub",
+         ACCENT_EMERALD, 0.33),
+        ("Q4 (M10-M12): UNIVERSAL STATEWIDE SATURATION & PROCUREMENT", 
+         "• Universal statewide saturation: 35 districts, ~32,000 ASHAs, 34 SNCUs, 100+ NBSUs\n• Achieve ABDM Milestone 1, 2, and 3 production certifications for ABHA linking\n• Complete CERT-In security penetration testing & ASDC sovereign hosting handover\n• Formal Swiss Challenge procurement submission under Assam Startup Policy",
+         ACCENT_ROSE, 0.17)
+    ]
+    for qtitle, qdesc, qcol, qy in q_phases:
+        qcard = FancyBboxPatch((0.035, qy), 0.61, 0.14, boxstyle="round,pad=0.006,rounding_size=0.008",
+                               facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=1, zorder=2)
+        ax.add_patch(qcard)
+        qpill = FancyBboxPatch((0.035, qy + 0.11), 0.61, 0.03, boxstyle="round,pad=0.003,rounding_size=0.004",
+                               facecolor=qcol, edgecolor='none', zorder=3)
+        ax.add_patch(qpill)
+        ax.text(0.045, qy + 0.125, qtitle, va='center', fontsize=7.6, fontweight='bold', color='#ffffff', zorder=4)
+        ax.text(0.045, qy + 0.02, qdesc, fontsize=6.8, color='#334155', linespacing=1.35, zorder=3)
+
+    # RIGHT SECTION: Grant Budget Allocation & Procurement (0.31 width)
+    rbox = FancyBboxPatch((0.68, 0.23), 0.30, 0.63, boxstyle="round,pad=0.01,rounding_size=0.012",
+                          facecolor='#f0fdf4', edgecolor='#bbf7d0', linewidth=1.4, zorder=1)
+    ax.add_patch(rbox)
+    sr = FancyBboxPatch((0.68, 0.81), 0.30, 0.05, boxstyle="round,pad=0.005,rounding_size=0.008",
+                        facecolor=ACCENT_TEAL, edgecolor='none', zorder=2)
+    ax.add_patch(sr)
+    ax.text(0.83, 0.835, "₹40 LAKH GRANT ALLOCATION", ha='center', va='center', fontsize=8.5, fontweight='bold', color='#ffffff', zorder=3)
+
+    budget_items = [
+        ("Core Clinical Software & CRDT Sync", "₹ 12,50,000", "31.25%", ACCENT_BLUE, 0.72),
+        ("108 Dispatch & Hospital Telemetry", "₹  7,50,000", "18.75%", ACCENT_PURPLE, 0.63),
+        ("Field Pilot & ASHA Capacity Building", "₹  8,00,000", "20.00%", ACCENT_EMERALD, 0.54),
+        ("Cloud Hosting & CERT-In Security Audit", "₹  4,50,000", "11.25%", ACCENT_AMBER, 0.45),
+        ("ABDM / FHIR & IoT Device Adapters", "₹  4,50,000", "11.25%", ACCENT_CYAN, 0.36),
+        ("Clinical Governance & Swiss Proposal", "₹  3,00,000", " 7.50%", ACCENT_ROSE, 0.27)
+    ]
+    for btitle, bamt, bpct, bcol, by in budget_items:
+        bbox = FancyBboxPatch((0.695, by), 0.27, 0.075, boxstyle="round,pad=0.004,rounding_size=0.006",
+                              facecolor='#ffffff', edgecolor='#cbd5e1', linewidth=0.8, zorder=2)
+        ax.add_patch(bbox)
+        ax.text(0.705, by + 0.048, btitle, fontsize=6.8, fontweight='bold', color='#0f172a', zorder=3)
+        ax.text(0.705, by + 0.018, bamt, fontsize=7.2, fontweight='bold', color=bcol, zorder=3)
+        ax.text(0.95, by + 0.018, bpct, ha='right', fontsize=7.2, fontweight='bold', color='#475569', zorder=3)
+
+    # Bottom Metric Banner: Procurement & ROI
+    bot = FancyBboxPatch((0.015, 0.02), 0.97, 0.18, boxstyle="round,pad=0.01,rounding_size=0.012",
+                         facecolor=NAVY_HEADER, edgecolor='#1e293b', linewidth=1.5, zorder=2)
+    ax.add_patch(bot)
+    ax.text(0.5, 0.165, "SWISS CHALLENGE PROCUREMENT MODEL: SUSTAINABLE PUBLIC HEALTH ECONOMICS", ha='center', fontsize=9.5, fontweight='bold', color='#38bdf8', zorder=3)
+
+    bm = [
+        ("FIRST-CUSTOMER", "SWISS CHALLENGE", "Direct procurement bridge via Assam Startup Policy", '#38bdf8'),
+        ("~₹12 / NEWBORN", "OPERATIONAL COST", "Funded under NHM RoP child health budget line", '#34d399'),
+        ("35 DISTRICTS", "STATEWIDE SCALE", "Covering ~4.85 lakh live births every year", '#fbbf24'),
+        ("100% AUDITABLE", "EVIDENCE DRIVEN", "Empirical data for INAP single-digit NMR goal", '#f43f5e')
+    ]
+    bx = 0.04
+    for val, lbl, sub, col in bm:
+        ax.text(bx + 0.10, 0.115, val, ha='center', va='center', fontsize=14.0, fontweight='bold', color=col, zorder=3)
+        ax.text(bx + 0.10, 0.075, lbl, ha='center', va='center', fontsize=7.8, fontweight='bold', color='#ffffff', zorder=3)
+        ax.text(bx + 0.10, 0.045, sub, ha='center', va='center', fontsize=6.8, color='#94a3b8', zorder=3)
+        bx += 0.24
+
+    save_infographic(fig, "diagram_8_rollout_roadmap_procurement")
+
 if __name__ == '__main__':
     print("Generating High-Impact 16:9 Widescreen Technological Framework Infographics...")
     create_high_impact_infographic_1()
     create_high_impact_infographic_2()
     create_high_impact_infographic_3()
     create_high_impact_infographic_4()
-    print("All 4 High-Impact Widescreen Infographics Successfully Rendered!")
+    create_high_impact_infographic_5()
+    create_high_impact_infographic_6()
+    create_high_impact_infographic_7()
+    create_high_impact_infographic_8()
+    print("All 8 High-Impact Widescreen Infographics Successfully Rendered!")

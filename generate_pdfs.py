@@ -270,6 +270,12 @@ def build_proposal_pdf(output_path):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 6))
+        elif 'Field 2:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_5_facility_bed_radar.jpg')
+            if os.path.exists(img):
+                story.append(Spacer(1, 4))
+                story.append(Image(img, width=504, height=283.5))
+                story.append(Spacer(1, 6))
         elif 'Field 3:' in sec_hdr:
             img = os.path.join(img_dir, 'diagram_3_clinical_triage_decision_tree.jpg')
             if os.path.exists(img):
@@ -283,7 +289,25 @@ def build_proposal_pdf(output_path):
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 6))
         elif 'Field 6:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_8_rollout_roadmap_procurement.jpg')
+            if os.path.exists(img):
+                story.append(Spacer(1, 4))
+                story.append(Image(img, width=504, height=283.5))
+                story.append(Spacer(1, 6))
+        elif 'Field 7:' in sec_hdr:
             img = os.path.join(img_dir, 'diagram_4_geospatial_referral_pipeline.jpg')
+            if os.path.exists(img):
+                story.append(Spacer(1, 4))
+                story.append(Image(img, width=504, height=283.5))
+                story.append(Spacer(1, 6))
+        elif 'Field 9:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_6_hbnc_continuity_growth.jpg')
+            if os.path.exists(img):
+                story.append(Spacer(1, 4))
+                story.append(Image(img, width=504, height=283.5))
+                story.append(Spacer(1, 6))
+        elif 'Field 11:' in sec_hdr:
+            img = os.path.join(img_dir, 'diagram_7_vernacular_caregiver_advisory.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
@@ -368,14 +392,36 @@ def build_proof_of_work_pdf(output_path):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 5))
-        elif '4. Real-World Field Case Studies' in sec_title:
-            img = os.path.join(img_dir, 'diagram_4_geospatial_referral_pipeline.jpg')
+        elif '3. Empirical Model Benchmarks' in sec_title:
+            img = os.path.join(img_dir, 'diagram_5_facility_bed_radar.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
                 story.append(Spacer(1, 5))
+        elif '4. Real-World Field Case Studies' in sec_title:
+            img1 = os.path.join(img_dir, 'diagram_4_geospatial_referral_pipeline.jpg')
+            if os.path.exists(img1):
+                story.append(Spacer(1, 4))
+                story.append(Image(img1, width=504, height=283.5))
+                story.append(Spacer(1, 5))
+            img2 = os.path.join(img_dir, 'diagram_6_hbnc_continuity_growth.jpg')
+            if os.path.exists(img2):
+                story.append(Spacer(1, 4))
+                story.append(Image(img2, width=504, height=283.5))
+                story.append(Spacer(1, 5))
         elif '5. System Architecture' in sec_title:
-            img = os.path.join(img_dir, 'diagram_2_system_architecture.jpg')
+            img1 = os.path.join(img_dir, 'diagram_2_system_architecture.jpg')
+            if os.path.exists(img1):
+                story.append(Spacer(1, 4))
+                story.append(Image(img1, width=504, height=283.5))
+                story.append(Spacer(1, 5))
+            img2 = os.path.join(img_dir, 'diagram_7_vernacular_caregiver_advisory.jpg')
+            if os.path.exists(img2):
+                story.append(Spacer(1, 4))
+                story.append(Image(img2, width=504, height=283.5))
+                story.append(Spacer(1, 5))
+        elif '6. Security, Compliance' in sec_title:
+            img = os.path.join(img_dir, 'diagram_8_rollout_roadmap_procurement.jpg')
             if os.path.exists(img):
                 story.append(Spacer(1, 4))
                 story.append(Image(img, width=504, height=283.5))
