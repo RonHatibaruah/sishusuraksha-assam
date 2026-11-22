@@ -35,26 +35,26 @@ $$\text{Triage Index } (\Phi) = \sum_{i=1}^{n} w_i \cdot \delta_i(x_i)$$
 Where $x_i$ represents clinical parameters, $\delta_i(x_i) \in \{0, 1, 2, 3\}$ is the physiological deviation score, and $w_i$ represents condition-specific clinical severity weights:
 
 $$\delta_{\text{temp}}(T) = \begin{cases} 
-3 & \text{if } T < 35.5^\circ\text{C (Severe Hypothermia)} \\
-2 & \text{if } 35.5^\circ\text{C} \le T < 36.0^\circ\text{C (Moderate Hypothermia)} \\
+3 & \text{if } T \text{ smaller than } 35.5^\circ\text{C (Severe Hypothermia)} \\
+2 & \text{if } 35.5^\circ\text{C} \le T \text{ smaller than } 36.0^\circ\text{C (Moderate Hypothermia)} \\
 0 & \text{if } 36.0^\circ\text{C} \le T \le 37.5^\circ\text{C (Normothermia)} \\
-2 & \text{if } 37.5^\circ\text{C} < T \le 38.5^\circ\text{C (Pyrexia)} \\
-3 & \text{if } T > 38.5^\circ\text{C (Hyperpyrexia / Sepsis)}
+2 & \text{if } 37.5^\circ\text{C} \text{ smaller than } T \le 38.5^\circ\text{C (Pyrexia)} \\
+3 & \text{if } T \text{ greater than } 38.5^\circ\text{C (Hyperpyrexia / Sepsis)}
 \end{cases}$$
 
 $$\delta_{\text{resp}}(RR) = \begin{cases} 
 3 & \text{if } RR \ge 70 \text{ breaths/min or Apnea episodes} \\
-2 & \text{if } 60 \le RR < 70 \text{ breaths/min (Tachypnea)} \\
-0 & \text{if } 40 \le RR < 60 \text{ breaths/min (Normal)} \\
-3 & \text{if } RR < 30 \text{ breaths/min (Bradypnea / Respiratory Failure)}
+2 & \text{if } 60 \le RR \text{ smaller than } 70 \text{ breaths/min (Tachypnea)} \\
+0 & \text{if } 40 \le RR \text{ smaller than } 60 \text{ breaths/min (Normal)} \\
+3 & \text{if } RR \text{ smaller than } 30 \text{ breaths/min (Bradypnea / Respiratory Failure)}
 \end{cases}$$
 
-Critical emergency conditions ($C_{\text{critical}} \in \{\text{Convulsions}, \text{Central Cyanosis}, \text{Expiratory Grunting}, \text{Unconsciousness}, \text{Birth Weight} < 1500\text{g}\}$) act as non-linear overrides:
+Critical emergency conditions ($C_{\text{critical}} \in \{\text{Convulsions}, \text{Central Cyanosis}, \text{Expiratory Grunting}, \text{Unconsciousness}, \text{Birth Weight smaller than 1500g}\}$) act as non-linear overrides:
 
 $$\text{Severity Classification} = \begin{cases}
 \mathbf{RED} & \text{if } \Phi \ge 6 \quad \lor \quad \exists C_{\text{critical}} = \text{True} \\
-\mathbf{YELLOW} & \text{if } 3 \le \Phi < 6 \\
-\mathbf{GREEN} & \text{if } \Phi < 3
+\mathbf{YELLOW} & \text{if } 3 \le \Phi \text{ smaller than } 6 \\
+\mathbf{GREEN} & \text{if } \Phi \text{ smaller than } 3
 \end{cases}$$
 
 ---

@@ -53,38 +53,47 @@ class NumberedCanvas(canvas.Canvas):
 def clean_inline_markdown(text):
     if not text:
         return ""
-    t = text.strip()
+    t = str(text).strip()
     
+    # 1. Protect intentional formatting tags so ReportLab formats them instead of printing raw text
+    t = re.sub(r'<\s*b\s*>', 'TAGBOLDSTART', t, flags=re.IGNORECASE)
+    t = re.sub(r'<\s*/\s*b\s*>', 'TAGBOLDEND', t, flags=re.IGNORECASE)
+    t = re.sub(r'<\s*i\s*>', 'TAGITALICSTART', t, flags=re.IGNORECASE)
+    t = re.sub(r'<\s*/\s*i\s*>', 'TAGITALICEND', t, flags=re.IGNORECASE)
+    t = re.sub(r'<\s*u\s*>', 'TAGUNDERLINESTART', t, flags=re.IGNORECASE)
+    t = re.sub(r'<\s*/\s*u\s*>', 'TAGUNDERLINEEND', t, flags=re.IGNORECASE)
+
+    # 2. Extract and preserve backtick code spans
     code_matches = []
     def save_code(m):
         code_matches.append(m.group(1))
-        return f"___CODE_MATCH_{len(code_matches)-1}___"
-    
+        return f"TAGCODEMATCH{len(code_matches)-1}END"
     t = re.sub(r'`([^`]+)`', save_code, t)
-    
-    # Escape XML
+
+    # 3. Replace any stray markup characters (< and >) with user-required replacements
+    t = t.replace('<', ' smaller than ')
+    t = t.replace('>', ' greater than ')
+
+    # 4. XML escape plain text (&, etc.)
     t = escape(t)
-    
-    # Bold italic
+
+    # 5. Convert markdown formatting to ReportLab XML tags
     t = re.sub(r'\*\*\*([^*]+)\*\*\*', r'<b><i>\1</i></b>', t)
-    t = re.sub(r'___([^_]+)___', r'<b><i>\1</i></b>', t)
-    
-    # Bold
     t = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', t)
-    t = re.sub(r'__([^_]+)__', r'<b>\1</b>', t)
-    
-    # Italic
     t = re.sub(r'\*([^*]+)\*', r'<i>\1</i>', t)
-    t = re.sub(r'_([^_]+)_', r'<i>\1</i>', t)
-    
-    # Links
     t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<font color="#0284c7"><u>\1</u></font>', t)
-    
-    # Restore code
+
+    # 6. Restore genuine bold / italic / underline tags for ReportLab Paragraph formatting
+    t = t.replace('TAGBOLDSTART', '<b>').replace('TAGBOLDEND', '</b>')
+    t = t.replace('TAGITALICSTART', '<i>').replace('TAGITALICEND', '</i>')
+    t = t.replace('TAGUNDERLINESTART', '<u>').replace('TAGUNDERLINEEND', '</u>')
+
+    # 7. Restore code spans
     for idx, c in enumerate(code_matches):
-        c_esc = escape(c)
-        t = t.replace(f"___CODE_MATCH_{idx}___", f'<font name="Courier" color="#be123c">{c_esc}</font>')
-        
+        c_clean = c.replace('<', ' smaller than ').replace('>', ' greater than ')
+        c_esc = escape(c_clean)
+        t = t.replace(f"TAGCODEMATCH{idx}END", f'<font name="Courier" color="#be123c">{c_esc}</font>')
+
     return t
 
 def safe_paragraph(text, style):
@@ -208,13 +217,17 @@ def build_proposal_pdf(output_path):
     )
     styles = getSampleStyleSheet()
 
+    app_title_style = ParagraphStyle(
+        'AppTitle', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=15, leading=19,
+        textColor=colors.HexColor('#881337'), spaceAfter=2
+    )
     title_style = ParagraphStyle(
-        'DocTitle', parent=styles['Title'], fontName='Helvetica-Bold', fontSize=15, leading=19,
-        textColor=colors.HexColor('#881337'), alignment=0, spaceAfter=2
+        'DocTitle', parent=styles['Title'], fontName='Helvetica-Bold', fontSize=12, leading=16,
+        textColor=colors.HexColor('#0f172a'), alignment=0, spaceAfter=2
     )
     subtitle_style = ParagraphStyle(
-        'DocSub', parent=styles['Normal'], fontName='Helvetica', fontSize=9, leading=12.5,
-        textColor=colors.HexColor('#be123c'), spaceAfter=4
+        'DocSub', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12,
+        textColor=colors.HexColor('#475569'), spaceAfter=4
     )
     meta_style = ParagraphStyle(
         'MetaStyle', parent=styles['Normal'], fontName='Helvetica', fontSize=8, leading=11, textColor=colors.HexColor('#334155')
@@ -225,14 +238,15 @@ def build_proposal_pdf(output_path):
     )
 
     story = []
-    story.append(safe_paragraph("NESFIC 2026 UNIFORM SOLUTION PROPOSAL (USPR)", title_style))
-    story.append(safe_paragraph("SishuSuraksha (শিশু-সুৰক্ষা) — Assam Sick Newborn Care Continuum & Referral Sentinel", subtitle_style))
-    story.append(safe_paragraph("<b>Official 12-Field Application Dossier for Stream 1 (Government Department Track)</b>", subtitle_style))
+    story.append(safe_paragraph("APPLICATION NAME: SISHUSURAKSHA", app_title_style))
+    story.append(safe_paragraph("Assam Sick Newborn Identification, Triage, Referral & Closed-Loop HBNC Platform", subtitle_style))
+    story.append(safe_paragraph("NESFIC 2026 UNIFORM SOLUTION PROPOSAL (USPR) — STREAM 1: GOVERNMENT TRACK", title_style))
 
     meta_data = [
-        [safe_paragraph("<b>Challenge ID:</b> NESFIC-D-26 (Govt Track)", meta_style), safe_paragraph("<b>Department:</b> Health & Family Welfare Department, Govt. of Assam", meta_style)],
-        [safe_paragraph("<b>Lead Applicant:</b> Ron Hatibaruah", meta_style), safe_paragraph("<b>Format:</b> Official Proposal Submission (PDF < 10 MB)", meta_style)],
-        [safe_paragraph("<b>Live Prototype:</b> https://sishusuraksha-assam.pages.dev/", meta_style), safe_paragraph("<b>Technical Synergy:</b> National Health Mission (NHM) Assam", meta_style)]
+        [safe_paragraph("<b>Application Name:</b> SishuSuraksha (Assam Sick Newborn Sentinel)", meta_style), safe_paragraph("<b>Challenge ID:</b> NESFIC-D-26 (Health & FW Track)", meta_style)],
+        [safe_paragraph("<b>Lead Applicant:</b> Ron Hatibaruah", meta_style), safe_paragraph("<b>Target Department:</b> Health & Family Welfare, Govt. of Assam", meta_style)],
+        [safe_paragraph("<b>Format:</b> Official 12-Field Proposal (PDF smaller than 10 MB)", meta_style), safe_paragraph("<b>Technical Synergy:</b> National Health Mission (NHM) Assam", meta_style)],
+        [safe_paragraph("<b>Live Prototype:</b> https://sishusuraksha-assam.pages.dev/", meta_style), safe_paragraph("<b>Code Repository:</b> https://github.com/RonHatibaruah/sishusuraksha-assam", meta_style)]
     ]
     t_meta = Table(meta_data, colWidths=[240, 264])
     t_meta.setStyle(TableStyle([
@@ -327,13 +341,17 @@ def build_proof_of_work_pdf(output_path):
     )
     styles = getSampleStyleSheet()
 
+    app_title_style = ParagraphStyle(
+        'AppTitle', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=15, leading=19,
+        textColor=colors.HexColor('#881337'), spaceAfter=2
+    )
     title_style = ParagraphStyle(
-        'DocTitle', parent=styles['Title'], fontName='Helvetica-Bold', fontSize=15, leading=19,
-        textColor=colors.HexColor('#881337'), alignment=0, spaceAfter=2
+        'DocTitle', parent=styles['Title'], fontName='Helvetica-Bold', fontSize=12, leading=16,
+        textColor=colors.HexColor('#0f172a'), alignment=0, spaceAfter=2
     )
     subtitle_style = ParagraphStyle(
-        'DocSub', parent=styles['Normal'], fontName='Helvetica', fontSize=9, leading=12.5,
-        textColor=colors.HexColor('#be123c'), spaceAfter=4
+        'DocSub', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12,
+        textColor=colors.HexColor('#475569'), spaceAfter=4
     )
     meta_style = ParagraphStyle(
         'MetaStyle', parent=styles['Normal'], fontName='Helvetica', fontSize=8, leading=11, textColor=colors.HexColor('#334155')
@@ -344,14 +362,15 @@ def build_proof_of_work_pdf(output_path):
     )
 
     story = []
-    story.append(safe_paragraph("NESFIC 2026 PROOF OF WORK & TECHNICAL DOSSIER", title_style))
-    story.append(safe_paragraph("SishuSuraksha: Algorithmic Bedside Triage, Bed Capacity Radar & Closed-Loop HBNC Continuum", subtitle_style))
-    story.append(safe_paragraph("<b>Technical Architecture, Mathematical Formulations, Validation Data & Field Case Studies</b>", subtitle_style))
+    story.append(safe_paragraph("APPLICATION NAME: SISHUSURAKSHA", app_title_style))
+    story.append(safe_paragraph("Algorithmic Bedside Triage, Bed Capacity Radar & Closed-Loop HBNC Continuum", subtitle_style))
+    story.append(safe_paragraph("NESFIC 2026 PROOF OF WORK & TECHNICAL EVIDENCE DOSSIER", title_style))
 
     meta_data = [
-        [safe_paragraph("<b>Challenge ID:</b> NESFIC-D-26 (Govt Track)", meta_style), safe_paragraph("<b>Department:</b> Health & Family Welfare Department, Govt. of Assam", meta_style)],
+        [safe_paragraph("<b>Application Name:</b> SishuSuraksha (Assam Sick Newborn Sentinel)", meta_style), safe_paragraph("<b>Challenge ID:</b> NESFIC-D-26 (Health & FW Track)", meta_style)],
         [safe_paragraph("<b>Lead Applicant:</b> Ron Hatibaruah", meta_style), safe_paragraph("<b>Classification:</b> Production-Grade Working Prototype", meta_style)],
-        [safe_paragraph("<b>Live Prototype:</b> https://sishusuraksha-assam.pages.dev/", meta_style), safe_paragraph("<b>Code Repository:</b> https://github.com/RonHatibaruah/sishusuraksha-assam", meta_style)]
+        [safe_paragraph("<b>Live Prototype:</b> https://sishusuraksha-assam.pages.dev/", meta_style), safe_paragraph("<b>Department:</b> Health & Family Welfare, Govt. of Assam", meta_style)],
+        [safe_paragraph("<b>Code Repository:</b> https://github.com/RonHatibaruah/sishusuraksha-assam", meta_style), safe_paragraph("<b>Deployment Target:</b> Cloudflare Global Edge", meta_style)]
     ]
     t_meta = Table(meta_data, colWidths=[240, 264])
     t_meta.setStyle(TableStyle([
