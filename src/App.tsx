@@ -8,11 +8,11 @@ import { HBNCContinuityTracker } from './components/HBNCContinuityTracker';
 import { ExecutiveAnalyticsAudit } from './components/ExecutiveAnalyticsAudit';
 import { CaregiverAdvisoryHub } from './components/CaregiverAdvisoryHub';
 import { TutorialModal } from './components/TutorialModal';
+import { useUrlRoute } from './hooks/useUrlRoute';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('triage');
+  const { activeTab, setActiveTab, isTutorialOpen, openTutorial, closeTutorial } = useUrlRoute();
   const [selectedRole, setSelectedRole] = useState<string>('ASHA');
-  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans">
@@ -21,15 +21,15 @@ export const App: React.FC = () => {
         setActiveTab={setActiveTab}
         selectedRole={selectedRole}
         setSelectedRole={setSelectedRole}
-        onOpenTutorial={() => setIsTutorialOpen(true)}
+        onOpenTutorial={openTutorial}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
-        {activeTab === 'triage' && <FieldTriageWorklist />}
-        {activeTab === 'beds' && <FacilityBedCommand />}
-        {activeTab === 'routing' && <GeospatialReferralRouter />}
-        {activeTab === 'hbnc' && <HBNCContinuityTracker />}
-        {activeTab === 'audit' && <ExecutiveAnalyticsAudit />}
+        {activeTab === 'triage'   && <FieldTriageWorklist />}
+        {activeTab === 'beds'     && <FacilityBedCommand />}
+        {activeTab === 'routing'  && <GeospatialReferralRouter />}
+        {activeTab === 'hbnc'     && <HBNCContinuityTracker />}
+        {activeTab === 'audit'    && <ExecutiveAnalyticsAudit />}
         {activeTab === 'advisory' && <CaregiverAdvisoryHub />}
       </main>
 
@@ -37,7 +37,7 @@ export const App: React.FC = () => {
 
       <TutorialModal
         isOpen={isTutorialOpen}
-        onClose={() => setIsTutorialOpen(false)}
+        onClose={closeTutorial}
       />
     </div>
   );

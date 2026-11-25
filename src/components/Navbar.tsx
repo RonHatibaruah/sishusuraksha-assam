@@ -1,23 +1,32 @@
 import React from 'react';
-import { 
-  Baby, 
-  Building2, 
-  Navigation, 
-  HeartHandshake, 
-  BarChart3, 
-  MessageSquare, 
-  HelpCircle, 
-  ShieldAlert, 
+import {
+  Baby,
+  Building2,
+  Navigation,
+  HeartHandshake,
+  BarChart3,
+  MessageSquare,
+  HelpCircle,
   User,
-  Heart
 } from 'lucide-react';
+import type { TabId } from '../hooks/useUrlRoute';
 
 interface NavbarProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab: TabId;
+  setActiveTab: (tab: TabId) => void;
   selectedRole: string;
   setSelectedRole: (role: string) => void;
   onOpenTutorial: () => void;
+}
+
+/** Navigate via History API without full-page reload */
+function navTo(
+  e: React.MouseEvent<HTMLAnchorElement>,
+  tab: TabId,
+  setActiveTab: (tab: TabId) => void
+) {
+  e.preventDefault();
+  setActiveTab(tab);
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -25,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   selectedRole,
   setSelectedRole,
-  onOpenTutorial
+  onOpenTutorial,
 }) => {
   return (
     <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md">
@@ -45,21 +54,27 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         <div className="flex items-center gap-4 text-[11px]">
-          <button
-            onClick={onOpenTutorial}
+          <a
+            href="/tutorial"
+            onClick={(e) => { e.preventDefault(); onOpenTutorial(); }}
             className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition-all font-semibold cursor-pointer"
-            title="Open Tutorial Guide: What the application is and how to use it"
+            title="Tutorial &amp; User Guide — direct link: /tutorial"
           >
             <HelpCircle className="w-3.5 h-3.5 text-rose-400" />
-            <span>Tutorial & User Guide</span>
-          </button>
+            <span>Tutorial &amp; User Guide</span>
+          </a>
           <span className="text-slate-500 font-mono hidden sm:inline">Dispur, Guwahati</span>
         </div>
       </div>
 
       {/* Main Brand & Role Switcher Bar */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+        <a
+          href="/triage"
+          onClick={(e) => navTo(e, 'triage', setActiveTab)}
+          className="flex items-center gap-3 no-underline"
+          aria-label="SishuSuraksha — home / field triage"
+        >
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-rose-950/50">
             <Baby className="w-6 h-6" />
           </div>
@@ -73,20 +88,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </div>
             <p className="text-xs text-slate-400">
-              Timely Identification, Referral & Follow-up of Sick Newborns
+              Timely Identification, Referral &amp; Follow-up of Sick Newborns
             </p>
           </div>
-        </div>
+        </a>
 
-        {/* Operational Role Switcher & Tutorial Quick-Button */}
+        {/* Role Switcher & Tutorial Quick-Button */}
         <div className="flex items-center gap-2 self-start md:self-center">
-          <button
-            onClick={onOpenTutorial}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-200 border border-rose-500/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
+          <a
+            href="/tutorial"
+            onClick={(e) => { e.preventDefault(); onOpenTutorial(); }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-200 border border-rose-500/40 text-xs font-bold transition-all shadow-sm cursor-pointer no-underline"
+            title="How to Use — open tutorial modal"
           >
             <HelpCircle className="w-4 h-4 text-rose-400" />
             <span>How to Use</span>
-          </button>
+          </a>
 
           <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
             <span className="text-slate-500 px-2 font-medium flex items-center gap-1 hidden sm:flex">
@@ -129,80 +146,92 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Tabs Navigation */}
-      <div className="max-w-7xl mx-auto px-4 border-t border-slate-800/60 flex space-x-1 overflow-x-auto py-1">
-        <button
-          onClick={() => setActiveTab('triage')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+      {/* Tabs Navigation — real <a> links for SEO & shareability */}
+      <nav className="max-w-7xl mx-auto px-4 border-t border-slate-800/60 flex space-x-1 overflow-x-auto py-1" aria-label="Application tabs">
+        <a
+          href="/triage"
+          onClick={(e) => navTo(e, 'triage', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'triage'
               ? 'bg-rose-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'triage' ? 'page' : undefined}
         >
           <Baby className="w-4 h-4" />
           Field Triage (ASHA Screening)
-        </button>
+        </a>
 
-        <button
-          onClick={() => setActiveTab('beds')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+        <a
+          href="/beds"
+          onClick={(e) => navTo(e, 'beds', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'beds'
               ? 'bg-cyan-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'beds' ? 'page' : undefined}
         >
           <Building2 className="w-4 h-4" />
           SNCU / NICU Bed Command
-        </button>
+        </a>
 
-        <button
-          onClick={() => setActiveTab('routing')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+        <a
+          href="/routing"
+          onClick={(e) => navTo(e, 'routing', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'routing'
               ? 'bg-purple-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'routing' ? 'page' : undefined}
         >
           <Navigation className="w-4 h-4" />
-          108 Dispatch & Riverine Route
-        </button>
+          108 Dispatch &amp; Riverine Route
+        </a>
 
-        <button
-          onClick={() => setActiveTab('hbnc')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+        <a
+          href="/hbnc"
+          onClick={(e) => navTo(e, 'hbnc', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'hbnc'
               ? 'bg-emerald-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'hbnc' ? 'page' : undefined}
         >
           <HeartHandshake className="w-4 h-4" />
           HBNC 7-Visit Continuum
-        </button>
+        </a>
 
-        <button
-          onClick={() => setActiveTab('audit')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+        <a
+          href="/audit"
+          onClick={(e) => navTo(e, 'audit', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'audit'
               ? 'bg-amber-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'audit' ? 'page' : undefined}
         >
           <BarChart3 className="w-4 h-4" />
-          Statewide Surveillance & Audit
-        </button>
+          Statewide Surveillance &amp; Audit
+        </a>
 
-        <button
-          onClick={() => setActiveTab('advisory')}
-          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+        <a
+          href="/advisory"
+          onClick={(e) => navTo(e, 'advisory', setActiveTab)}
+          className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap no-underline ${
             activeTab === 'advisory'
               ? 'bg-blue-600 text-white shadow-md'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
           }`}
+          aria-current={activeTab === 'advisory' ? 'page' : undefined}
         >
           <MessageSquare className="w-4 h-4" />
           Vernacular Caregiver Hub
-        </button>
-      </div>
+        </a>
+      </nav>
     </header>
   );
 };
